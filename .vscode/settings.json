@@ -1,0 +1,7 @@
+{
+  "eslint.options": {
+    "baseConfig": {
+      "extends": ["airbnb", "airbnb/hooks"]
+    }
+  },
+} 

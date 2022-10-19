@@ -1,25 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import {
+  Route,
+  Routes,
+  BrowserRouter,
+} from 'react-router-dom';
+import Layout from './layout';
 
-function App() {
+import Game1 from './pages/game-1';
+import Game2 from './pages/game-2';
+import Game3 from './pages/game-3';
+
+export default function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter basename="/2022-icax-hackathon">
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route
+            path="1"
+            element={<Game1 />}
+          />
+          <Route path="2" element={<Game2 />} />
+          <Route path="3" element={<Game3 />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
-
-export default App;
