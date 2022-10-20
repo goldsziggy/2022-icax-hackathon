@@ -2,7 +2,7 @@ import React, { useMemo, useState, useEffect } from 'react';
 import {
   Route,
   Routes,
-  BrowserRouter,
+  HashRouter,
 } from 'react-router-dom';
 
 import AppContext from './app-context';
@@ -106,9 +106,9 @@ export default function App() {
 
   return (
     <AppContext.Provider value={sharedState}>
-      <BrowserRouter basename="/2022-icax-hackathon">
+      <HashRouter basename="/">
         <Routes>
-          <Route path="/" element={<Layout />}>
+          <Route path="*" element={<Layout />}>
             <Route
               path="1"
               element={<Game1 />}
@@ -118,7 +118,7 @@ export default function App() {
             <Route path="4" element={<Game4 />} />
           </Route>
         </Routes>
-      </BrowserRouter>
+      </HashRouter>
     </AppContext.Provider>
   );
 }
