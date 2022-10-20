@@ -7,24 +7,44 @@ import GlassOfWater from './glass-of-water.svg';
 import Syringe from './syringe.svg';
 import Pills from './pills.svg';
 
+const hydrationThreshold = 30;
 function Stat({ className, name, value }) {
   return (
-    <div className={className}>
-      <span>{name}:</span>
-      <span>{value}</span>
-    </div>
+    <>
+      <span className={className}>{name}:</span>
+      <span className={className}>{value}</span>
+    </>
   );
 }
-
-const Girl = styled.img``;
-const Buttons = styled.div``;
-const StatsBox = styled.div`
-  padding: 30px;
-  font-family: Skia;
-  font-size: 18px;
+const StyledStat = styled(Stat)`
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  border: 1px solid black;
+  color: ${(p) => (p.alert ? 'red' : 'black')};
+  font-weight: ${(p) => (p.alert ? 'bold' : 'normal')};
+`;
+const Girl = styled.img`
+  height: 50vh;
+  width: 50vh;
+`;
+const Buttons = styled.div`
+  margin: 0px;
+  padding: 0px;
+  left: 0px;
+  right: 0px;
+  display: flex;
+  flex-direction: column;
+  align-self: right;
+`;
+const StatsBox = styled.div`
+  margin-right: 10px;
+  margin-top: 30px;
+  margin-left: 10px;
+  font-family: Skia;
+  font-size: 15px;
+  display: grid;
+  grid-template-columns: 150px 1fr;
+  height: 25vh;
+  width: 95vw;
+  text-align: left;
 `;
 const Message = styled.div`
   font-family: Skia;
@@ -37,49 +57,55 @@ const Message = styled.div`
 function getHydrationMessage() {
   return 'Keep it up! Drinking lots of water is key';
 }
-const StyledStat = styled(Stat)`
-  display: grid;
-  color: ${(p) => (p.alert ? 'red' : 'black')};
-  font-weight: ${(p) => (p.alert ? 'bold' : 'normal')};
-`;
+
 const StyledImage = styled.img`
-  height: 80px;
-  width: 80px;
+  height: 50px;
+  width: 50px;
   border: 1px solid black;
   padding: 5px;
   margin: 5px;
 `;
-export default function Game1() {
-  function statReducer(state, action) {
-    switch (action.type) {
-      case 'GIVE_WATER':
-        return {
-          ...state,
-          hydration: state.hydration + action.value,
-          message: getHydrationMessage(),
-        };
-      case 'GIVE_SHOT':
-        return {
-          ...state,
-          shots: { upToDate: true, lastGiven: state.currentTime },
-          message:
-            "Great! It' important to stay up-to-date on your shots to prevent infections",
-        };
-      case 'GIVE_ANTIBIOTICS':
-        return {
-          ...state,
-          antibiotics: { upToDate: true, lastGiven: state.currentTime },
-        };
-      case 'ADVANCE_TIME':
-        return {
-          ...state,
-          currentTime: state.currentTime + action.value,
-          hydration: state.hydration - 1,
-        };
-      default:
-        throw new Error();
-    }
+const Grid = styled.div`
+  position: absolute;
+  display: inherit;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+`;
+
+function statReducer(state, action) {
+  switch (action.type) {
+    case 'GIVE_WATER':
+      return {
+        ...state,
+        hydration: state.hydration + action.value,
+        message: getHydrationMessage(),
+      };
+    case 'GIVE_SHOT':
+      return {
+        ...state,
+        shots: { upToDate: true, lastGiven: state.currentTime },
+        message:
+          "Great! It' important to stay up-to-date on your shots to prevent infections",
+      };
+    case 'GIVE_ANTIBIOTICS':
+      return {
+        ...state,
+        antibiotics: { upToDate: true, lastGiven: state.currentTime },
+      };
+    case 'ADVANCE_TIME':
+      return {
+        ...state,
+        currentTime: state.currentTime + action.value,
+        hydration: state.hydration - 1,
+        pain: state.hydration > hydrationThreshold ? 0 : 1,
+      };
+    default:
+      throw new Error();
   }
+}
+
+export default function Game1() {
   const [state, dispatch] = React.useReducer(statReducer, {
     hydration: 100,
     pain: 0,
@@ -100,12 +126,14 @@ export default function Game1() {
   });
 
   return (
-    <>
+    <Grid>
       <StatsBox>
         <StyledStat
           name="Hydration"
           value={`${state.hydration}%`}
-          alert={state.hydration !== null && state.hydration < 90}
+          alert={
+            state.hydration !== null && state.hydration < hydrationThreshold
+          }
         />
         <StyledStat name="Pain" value={`${state.pain}`} />
         <StyledStat name="Temperature" value={`${state.temperature}°F`} />
@@ -140,7 +168,7 @@ export default function Game1() {
       </Buttons>
       <Message>{state.message}</Message>
       <Girl src={GirlSvg} />
-      <div>{JSON.stringify(state)}</div>
-    </>
+      <StatsBox>{JSON.stringify(state)}</StatsBox>
+    </Grid>
   );
 }
