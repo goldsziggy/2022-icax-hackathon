@@ -43,7 +43,7 @@ ${(props) => {
       return css`
       .cls-0, .cls-1, .cls-2, ellipse {
         transition-delay: .5s;
-        transform: matrix(1,0,0,.75,0,30);
+        transform: matrix(.95,0,0,.75,3,30);
       }
       text {
         transition-delay: .5s;
@@ -54,7 +54,7 @@ ${(props) => {
       return css`
         .cls-0, .cls-1, .cls-2, ellipse {
           transition-delay: .5s;
-          transform: matrix(.9,0,0,.33,6,80);
+          transform: matrix(.9,0,0,.33,6,81);
         }
         text {
           transition-delay: .5s;
@@ -66,7 +66,7 @@ ${(props) => {
     return css`
         .cls-0, .cls-1, .cls-2, ellipse {
           transition-delay: .5s;
-          transform: matrix(0.9, 0, 0, 0.05, 6, 115);
+          transform: matrix(.75, 0, 0, 0.05, 14, 115)
         }
         text {
           transition-delay: .5s;
