@@ -1,6 +1,6 @@
 import './global.css';
-import React, { useMemo, useState } from 'react';
-import { Outlet } from 'react-router-dom';
+import React, { useMemo, useState, useContext } from 'react';
+import { Outlet, Link } from 'react-router-dom';
 import styled from 'styled-components';
 import {
   Box,
@@ -8,7 +8,8 @@ import {
   Button,
   List,
   ListItem,
-  Link,
+  Card,
+  // Link,
   Header,
   Toolbar,
 } from 'grape-ui-react';
@@ -16,9 +17,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 import AppContext from './app-context';
 
-// import { ReactComponent as Logo } from './assets/waterglass.svg';
 const ToolbarButton = styled(Button)``;
 const BaseBox = styled(Box)``;
+const CustomList = styled(List)`
+a {
+  color: #F8F8FF
+}
+`;
 
 BaseBox.defaultProps = {
   flex: '1 100%',
@@ -30,9 +35,11 @@ const BoxAside = styled(BaseBox)`
 
 const FlexWrapper = styled(Flex)`
   text-align: center;
-  height: 100%;
-  width: 100%;
 `;
+
+const NotificationContainer = styled(Box)`
+position: absolute;`;
+const Notification = styled(Card)``;
 
 const leftArea = (isMenuVisibile, setIsMenuVisibile) => (
   <Flex alignItems="center" ml={-3}>
@@ -50,20 +57,14 @@ const leftArea = (isMenuVisibile, setIsMenuVisibile) => (
 
 FlexWrapper.defaultProps = {
   flexDirection: 'column',
-  flexWrap: 'wrap',
 };
 
 export default function Layout() {
-  const [example, setExample] = useState(undefined);
+  const { notifications } = useContext(AppContext);
   const [isMenuVisibile, setIsMenuVisibile] = useState(false);
 
-  const sharedState = useMemo(() => ({
-    example,
-    setExample,
-  }), [example]);
-
   return (
-    <FlexWrapper className="layout" id="layout">
+    <FlexWrapper className="layout" id="layout" alignItems="stretch">
       <Toolbar
         bg="#8755D9"
         leftArea={leftArea(isMenuVisibile, setIsMenuVisibile)}
@@ -73,7 +74,7 @@ export default function Layout() {
         flex="1"
         order="1"
         justifyContent="center"
-        flexDirection="column"
+        flexDirection="row"
 
       >
         {isMenuVisibile ? (
@@ -81,41 +82,36 @@ export default function Layout() {
             bg="#383838"
             maxWidth="25%"
           >
-            <List>
-              <ListItem>
-                <Link
-                  href="/2022-icax-hackathon/1"
-                >
-                  Game 1
-                </Link>
+            <CustomList unstyled>
+              <ListItem mt="1rem">
+                <Link to="/1">Game 1</Link>
               </ListItem>
-              <ListItem>
-                <Link
-                  href="/2022-icax-hackathon/2"
-                >
-                  Game 2
-                </Link>
+              <ListItem mt="1rem">
+                <Link to="/2">Game 2</Link>
               </ListItem>
-              <ListItem>
-                <Link
-                  href="/2022-icax-hackathon/3"
-                >
-                  Game 3
-                </Link>
+              <ListItem mt="1rem">
+                <Link to="/3">Game 3</Link>
               </ListItem>
-            </List>
+              <ListItem mt="1rem">
+                <Link to="/4">Water Clicker</Link>
+              </ListItem>
+            </CustomList>
           </BoxAside>
         ) : null}
-        <AppContext.Provider value={sharedState}>
-          <FlexWrapper
-            id="common-main"
-            flex="1"
-            order="1"
-            justifyContent="center"
-          >
-            <Outlet />
-          </FlexWrapper>
-        </AppContext.Provider>
+
+        <FlexWrapper
+          id="common-main"
+          flex="1"
+          order="1"
+          justifyContent="center"
+        >
+          <Outlet />
+        </FlexWrapper>
+        <NotificationContainer>
+          {notifications.map((notification) => (
+            <Notification>{notification.message}</Notification>))}
+        </NotificationContainer>
+
       </FlexWrapper>
     </FlexWrapper>
 
