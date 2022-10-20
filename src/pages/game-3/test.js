@@ -12,3 +12,15 @@ export default function Game3() {
 
   );
 }
+
+// pre flipping
+//   render() {
+//     return (
+//       <div className="card" onClick={this.handleChange}>
+//         <div>
+//           <img value={this.props.cardName} className="cardimg" src={`${process.env.PUBLIC_URL}/${this.props.imageName}`} alt="cell" />
+//         </div>
+
+//       </div>
+//     );
+//   }

@@ -7,16 +7,16 @@ class Game3 extends React.Component {
     super(props);
     this.state = {
       cardsSet1: [
-        { name: 'Cell', image: 'Cell.png' },
-        { name: 'Test', image: 'prevent.jpeg' },
-        { name: 'Test', image: 'BloodFlow.jpeg' },
-        { name: 'Test', image: 'Triggers.jpg' },
+        { name: 'Cell1', image: 'Cell.png' },
+        { name: 'Cell2', image: 'prevent.jpeg' },
+        { name: 'Cell3', image: 'BloodFlow.jpeg' },
+        { name: 'Cell4', image: 'Triggers.jpg' },
       ],
       cardsSet2: [
-        { name: 'Test', image: 'Triggers.jpg' },
-        { name: 'Test', image: 'Cell.png' },
-        { name: 'Test', image: 'BloodFlow.jpeg' },
-        { name: 'Test', image: 'prevent.jpeg' },
+        { name: 'Cell5', image: 'Triggers.jpg' },
+        { name: 'Cell6', image: 'Cell.png' },
+        { name: 'Cell7', image: 'BloodFlow.jpeg' },
+        { name: 'Cell8', image: 'prevent.jpeg' },
       ],
       CardClickCount: 0,
 
@@ -39,9 +39,7 @@ class Game3 extends React.Component {
             <Card cardName={card.name} imageName={card.image} />
           ))}
         </div>
-
       </div>
-
     );
   }
 }
