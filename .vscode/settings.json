@@ -1,7 +1,14 @@
 {
   "eslint.options": {
     "baseConfig": {
-      "extends": ["airbnb", "airbnb/hooks"]
+      "extends": [
+        "airbnb",
+        "airbnb/hooks"
+      ]
     }
   },
-} 
+  "editor.formatOnSave": true,
+  "[javascript]": {
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+  }
+}

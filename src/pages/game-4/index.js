@@ -31,46 +31,30 @@ const WaterGlassContainer = styled.div`
 
 ${(props) => {
     if (props.currentFillState === 3) {
-      return css`.cls-0, .cls-1, .cls-2, ellipse {
+      return css`.cls-0, .cls-1, .cls-2, ellipse, #text {
         transition-delay: .5s;
         transform: matrix(1,0,0,1,0,0);
-      }
-      text {
-        transition-delay: .5s;
-        transform: matrix(4.188377, 0, 0, 0.583715, -173.178467, 6.433594);
       }`;
     } if (props.currentFillState === 2) {
       return css`
-      .cls-0, .cls-1, .cls-2, ellipse {
+      .cls-0, .cls-1, .cls-2, ellipse, #text {
         transition-delay: .5s;
-        transform: matrix(1,0,0,.75,0,30);
-      }
-      text {
-        transition-delay: .5s;
-        transform: matrix(4.188377, 0, 0, 0.583715, -173.178467, 15.433594);
+        transform: matrix(.95,0,0,.75,3,30);
       }
     `;
     } if (props.currentFillState === 1) {
       return css`
-        .cls-0, .cls-1, .cls-2, ellipse {
+        .cls-0, .cls-1, .cls-2, ellipse, #text {
           transition-delay: .5s;
-          transform: matrix(.9,0,0,.33,6,80);
-        }
-        text {
-          transition-delay: .5s;
-          transform: matrix(4.188377, 0, 0, 0.583715, -171.178467, 30.433594);
+          transform: matrix(.9,0,0,.33,6,81);
         }
     `;
     }
 
     return css`
-        .cls-0, .cls-1, .cls-2, ellipse {
+        .cls-0, .cls-1, .cls-2, ellipse, #text {
           transition-delay: .5s;
-          transform: matrix(0.9, 0, 0, 0.05, 6, 115);
-        }
-        text {
-          transition-delay: .5s;
-          transform: matrix(4.188377,0,0,0.0583715,-171.178,112.434);
+          transform: matrix(.75, 0, 0, 0.05, 14, 115)
         }
     `;
   }}
@@ -90,8 +74,7 @@ const pollFunction = () => (gameState, setGameState) => {
 
     if (remainingTime <= 0) {
       setGameState({ ...gameState, timeLastClicked: Date.now(), currentFillState: 3 });
-      // waterClickerState.setTimeLastClicked(Date.now());
-      // waterClickerState.setCurrentFillState(3);
+
       return 'Water Clicker has refreshed!';
     }
     return '';

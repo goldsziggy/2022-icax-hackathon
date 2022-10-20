@@ -2,16 +2,29 @@ import React, { useMemo, useState, useEffect } from 'react';
 import {
   Route,
   Routes,
-  BrowserRouter,
+  HashRouter,
 } from 'react-router-dom';
+
 import AppContext from './app-context';
 import Layout from './layout';
 
-import Game1 from './pages/game-1';
+import Game1, { getMessage, statReducer } from './pages/game-1';
 import Game2 from './pages/game-2';
 import Game3 from './pages/game-3';
 import Game4 from './pages/game-4';
 
+export const defaultPetGameState = {
+  hydration: 100,
+  pain: { level: 0, lastHadPain: Date.now(), daysWithoutPain: 0 },
+  temperature: 68,
+  daysWithoutPain: 0,
+  antibiotics: { upToDate: false, lastGiven: null, streak: 0 },
+  shots: { upToDate: false, lastGiven: null },
+  currentTime: Date.now(),
+  message: getMessage('welcome'),
+  activeInfection: false,
+
+};
 function getInitialStateFromLocalStorage(itemName, defaultState) {
   const item = localStorage.getItem(itemName);
   return item ? JSON.parse(item) : defaultState;
@@ -21,16 +34,16 @@ export default function App() {
   const [notifications, setNotifications] = useState([]);
   const [matchingGameState, setMatchingGameState] = useState(getInitialStateFromLocalStorage('matchingGameState', {}));
   const [quizGameState, setQuizGameState] = useState(getInitialStateFromLocalStorage('quizGameState', {}));
-  const [petGameState, setPetGameState] = useState(getInitialStateFromLocalStorage('petGameState', {}));
   const [waterClickerState, setWaterClickerState] = useState(getInitialStateFromLocalStorage('waterClickerGameState', {}));
   const [petGamePollFunction, setPetGamePollFunction] = useState(() => {});
   const [waterClickerPollFunction, setWaterClickerPollFunction] = useState(() => {});
-
+  const [petGameState, dispatchPetGameState] = React.useReducer(statReducer, getInitialStateFromLocalStorage('petGameState', defaultPetGameState));
   const sharedState = useMemo(() => ({
     notifications,
     matchingGameState,
     quizGameState,
     petGameState,
+    dispatchPetGameState,
     petGamePollFunction,
     waterClickerState,
     waterClickerPollFunction,
@@ -38,14 +51,9 @@ export default function App() {
     setNotifications,
     setMatchingGameState,
     setQuizGameState,
-    setPetGameState,
     setPetGamePollFunction,
     setWaterClickerPollFunction,
-  }), [notifications,
-    matchingGameState,
-    quizGameState,
-    petGameState,
-    waterClickerState, waterClickerPollFunction]);
+  }), [notifications, matchingGameState, quizGameState, petGameState, petGamePollFunction, waterClickerState, waterClickerPollFunction]);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -68,8 +76,8 @@ export default function App() {
         }
       }
 
-      if (petGameState.pollFunction) {
-        const message = petGameState.pollFunction();
+      if (petGamePollFunction) {
+        const message = petGamePollFunction(petGameState, dispatchPetGameState);
         if (message && message.length > 0) {
           const id = crypto.randomUUID();
           setNotifications([...notifications, { message, id }]);
@@ -87,7 +95,7 @@ export default function App() {
       }
     }, 1000);
     return () => clearInterval(interval);
-  }, [matchingGameState, petGameState, waterClickerState, quizGameState, notifications]);
+  }, [matchingGameState, petGameState, waterClickerState, quizGameState, notifications, petGamePollFunction, waterClickerPollFunction]);
 
   useEffect(() => {
     localStorage.setItem('matchingGameState', JSON.stringify(matchingGameState));
@@ -98,9 +106,9 @@ export default function App() {
 
   return (
     <AppContext.Provider value={sharedState}>
-      <BrowserRouter basename="/2022-icax-hackathon">
+      <HashRouter basename="/">
         <Routes>
-          <Route path="/" element={<Layout />}>
+          <Route path="*" element={<Layout />}>
             <Route
               path="1"
               element={<Game1 />}
@@ -110,7 +118,7 @@ export default function App() {
             <Route path="4" element={<Game4 />} />
           </Route>
         </Routes>
-      </BrowserRouter>
+      </HashRouter>
     </AppContext.Provider>
   );
 }

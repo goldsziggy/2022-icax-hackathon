@@ -1,7 +1,7 @@
 {
   "name": "2022-icax-hackathon",
   "version": "0.1.0",
-  "homepage": "https://goldsziggy.github.io/2022-icax-hackathon",
+  "homepage": "https://goldsziggy.github.io/2022-icax-hackathon/",
   "private": true,
   "dependencies": {
     "@fortawesome/free-solid-svg-icons": "^6.2.0",
