@@ -74,7 +74,7 @@ export function getMessage(key, param) {
     case 'gaveAntibiotics':
       return 'Excellent! Daily antibiotic use can prevent infections';
     case 'medStreak':
-      return `${param} ${param === 1 ? 'day' : 'days'} in a row`;
+      return `${param} ${param === 1 ? 'dose' : 'doses'} in a row`;
     case 'vaccination':
       return "Great job! It's important to stay up-to-date on your shots to prevent infections";
     case 'vaccinationsUpToDate':
@@ -120,10 +120,7 @@ export function statReducer(state, action) {
       };
     case 'GIVE_ANTIBIOTICS':
     {
-      const oneDay = 1000 * 60 * 60 * 24;
-      const halfDay = oneDay / 2;
-      const timeSinceLastGiven = state.currentTime - state.antibiotics.lastGiven;
-      if (timeSinceLastGiven > halfDay) {
+      if (!state.antibiotics.upToDate) {
         return {
           ...state,
           message: getMessage('gaveAntibiotics'),
@@ -139,10 +136,20 @@ export function statReducer(state, action) {
           -10 * ((state.hydration - hydrationThreshold) / hydrationThreshold),
         );
       const newLastHadPain = state.pain.level > 0 ? state.currentTime : state.pain.lastHadPain;
+      const oneDay = 1000 * 60 * 60 * 24;
+      const halfDay = oneDay / 2;
+      const timeSinceLastGivenAntibiotics = state.currentTime - state.antibiotics.lastGiven;
+      const timeSinceLastGivenShots = state.currentTime - state.shots.lastGiven;
       return {
         ...state,
         currentTime: state.currentTime + action.value,
         hydration: Math.max(0, state.hydration - 1),
+        shots: { ...state.shots, upToDate: timeSinceLastGivenShots < 60 * halfDay },
+        antibiotics: {
+          ...state.antibiotics,
+          upToDate: (timeSinceLastGivenAntibiotics < halfDay),
+          streak: (timeSinceLastGivenAntibiotics > oneDay ? 0 : state.antibiotics.streak),
+        },
         pain: {
           ...state.pain,
           level: newPainLevel,
@@ -226,7 +233,6 @@ export default function Game1() {
       </Buttons>
       <Message>{state.message}</Message>
       <Girl src={GirlSvg} />
-      <StatsBox>{JSON.stringify(state)}</StatsBox>
     </Grid>
   );
 }
