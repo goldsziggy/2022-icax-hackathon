@@ -90,8 +90,7 @@ const pollFunction = () => (gameState, setGameState) => {
 
     if (remainingTime <= 0) {
       setGameState({ ...gameState, timeLastClicked: Date.now(), currentFillState: 3 });
-      // waterClickerState.setTimeLastClicked(Date.now());
-      // waterClickerState.setCurrentFillState(3);
+
       return 'Water Clicker has refreshed!';
     }
     return '';
