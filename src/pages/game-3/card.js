@@ -1,5 +1,6 @@
-import { render } from '@testing-library/react';
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import './game3.css';
 
 class Card extends React.Component {
@@ -10,12 +11,23 @@ class Card extends React.Component {
     };
   }
 
+  handleChange(e) {
+    console.log(process.env.PUBLIC_URL);
+    console.log('D testing onClick event');
+  }
+
   render() {
     return (
-      <div className="card">
-        {this.props.cardName}
+      <div className="card" onClick={this.handleChange}>
+        <div>
+          <img className="cardimg" src={`${process.env.PUBLIC_URL}/${this.props.imageName}`} alt="cell" />
+        </div>
+
       </div>
     );
   }
 }
+Card.propTypes = {
+  imageNeme: PropTypes.string,
+};
 export default Card;

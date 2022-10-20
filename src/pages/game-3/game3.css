@@ -1,7 +1,8 @@
-.bubble {
+.cardimg {
     position: relative;
-    height: 50px;
-    width: 50px;
+    height: 200px;
+    width:200px;
+    border:ridge;
 }
 #screen {
     background: '#F9E557';
@@ -9,8 +10,16 @@
 }
 .card {
     border: ridge;
-    padding: 50px;
-    display: inline;
+    padding:10px;
     background:  #65EFCF;
-    /* margin: 10px; */
+    height: 200px;
+    width:200px;
+    align-items:center;
+    justify-content: center;
+   
+}
+.cardGroup {
+    /* padding: 50px; */
+    margin: 10px;
+    display: flex;
 }

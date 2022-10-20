@@ -1,5 +1,4 @@
 import React from 'react';
-import { Box, Flex } from 'grape-ui-react';
 import Card from './card';
 import './game3.css';
 
@@ -7,30 +6,42 @@ class Game3 extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      cards: [1, 2, 3, 4],
-    };
-  }
+      cardsSet1: [
+        { name: 'Cell', image: 'Cell.png' },
+        { name: 'Test', image: 'prevent.jpeg' },
+        { name: 'Test', image: 'BloodFlow.jpeg' },
+        { name: 'Test', image: 'Triggers.jpg' },
+      ],
+      cardsSet2: [
+        { name: 'Test', image: 'Triggers.jpg' },
+        { name: 'Test', image: 'Cell.png' },
+        { name: 'Test', image: 'BloodFlow.jpeg' },
+        { name: 'Test', image: 'prevent.jpeg' },
+      ],
+      CardClickCount: 0,
 
-  componentDidMount() {
-    console.log('component just mounted - have the bubble at the bottom of the page');
+    };
   }
 
   render() {
     return (
       <div style={{ backgroundColor: '#F9E557', height: '100vh' }}>
-        <Flex
-          flexDirection="row"
-          flexWrap="wrap"
-          justifyContent="space-around"
-        >
-          {this.state.cards.map((card) => (
 
-            <Card cardName={card} />
+        <div className="cardGroup">
+          {this.state.cardsSet1.map((card) => (
+
+            <Card cardName={card.name} imageName={card.image} />
           ))}
+        </div>
+        <div className="cardGroup">
+          {this.state.cardsSet2.map((card) => (
 
-        </Flex>
+            <Card cardName={card.name} imageName={card.image} />
+          ))}
+        </div>
 
       </div>
+
     );
   }
 }
