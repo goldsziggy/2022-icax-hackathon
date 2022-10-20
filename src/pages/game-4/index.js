@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import {
-  Header, Box, Card, Flex, Paragraph,
+  Header, Box, Card, Flex,
 } from 'grape-ui-react';
 import styled, { css } from 'styled-components';
 import useAudio from '../../hooks/use-audio';
+import AppContext from '../../app-context';
 import { ReactComponent as WaterGlass } from '../../assets/waterglass.svg';
 
 const handleClick = ({
@@ -42,43 +43,86 @@ ${(props) => {
       return css`
       .cls-0, .cls-1, .cls-2, ellipse {
         transition-delay: .5s;
-        transform: matrix(1,0,0,.75,0,30);
+        transform: matrix(.95,0,0,.75,3,30);
       }
       text {
         transition-delay: .5s;
         transform: matrix(4.188377, 0, 0, 0.583715, -173.178467, 15.433594);
       }
     `;
-    }
-    return css`
+    } if (props.currentFillState === 1) {
+      return css`
         .cls-0, .cls-1, .cls-2, ellipse {
           transition-delay: .5s;
-          transform: matrix(.9,0,0,.33,6,80);
+          transform: matrix(.9,0,0,.33,6,81);
         }
         text {
           transition-delay: .5s;
           transform: matrix(4.188377, 0, 0, 0.583715, -171.178467, 30.433594);
         }
     `;
+    }
+
+    return css`
+        .cls-0, .cls-1, .cls-2, ellipse {
+          transition-delay: .5s;
+          transform: matrix(.75, 0, 0, 0.05, 14, 115)
+        }
+        text {
+          transition-delay: .5s;
+          transform: matrix(4.188377,0,0,0.0583715,-171.178,112.434);
+        }
+    `;
   }}
 `;
-export default function Game3() {
-  const [numberOfClicks, setNumberOfClicks] = useState(0);
-  const [currentFillState, setCurrentFillState] = useState(3);
-  const [timeLastClicked, setTimeLastClicked] = useState(Date.now());
-  const [timeTillRefresh, setTimeTillRefresh] = useState(0);
 
-  const [playing, toggle] = useAudio(SOUND_URL);
+const pollFunction = () => (gameState, setGameState) => {
+  try {
+    const remainingTime = 30 - (Date.now() - gameState.timeLastClicked) / 1000;
+    setGameState({ ...gameState, timeTillRefresh: parseInt(remainingTime, 10) });
+
+    console.log('inside poll!', {
+      remainingTime,
+      timeTillRefresh: gameState.timeTillRefresh,
+      timeLastClicked: gameState.timeLastClicked,
+      numberOfClicks: gameState.numberOfClicks,
+    });
+
+    if (remainingTime <= 0) {
+      setGameState({ ...gameState, timeLastClicked: Date.now(), currentFillState: 3 });
+      // waterClickerState.setTimeLastClicked(Date.now());
+      // waterClickerState.setCurrentFillState(3);
+      return 'Water Clicker has refreshed!';
+    }
+    return '';
+  } catch (e) {
+    console.log(e);
+    return '';
+  }
+};
+
+export default function WaterClicker() {
+  const { setWaterClickerState, waterClickerState, setWaterClickerPollFunction } = useContext(AppContext);
+
+  const [numberOfClicks, setNumberOfClicks] = useState(waterClickerState.numberOfClicks || 0);
+  const [currentFillState, setCurrentFillState] = useState(waterClickerState.currentFillState || 3);
+  const [timeLastClicked, setTimeLastClicked] = useState(waterClickerState.timeLastClicked || Date.now());
+  const timeTillRefresh = waterClickerState.timeTillRefresh || 0;
 
   useEffect(() => {
-    setTimeout(() => {
-      const remainingTime = 30 - (Date.now() - timeLastClicked) / 1000;
-      setTimeTillRefresh(parseInt(remainingTime));
-      if (remainingTime <= 0) {
-        setCurrentFillState(3);
-      }
-    }, 1000);
-  }, [timeTillRefresh, timeLastClicked]);
+    setWaterClickerState({
+      numberOfClicks,
+      currentFillState,
+      timeLastClicked,
+      timeTillRefresh,
+    });
+  }, [numberOfClicks, currentFillState, timeLastClicked, timeTillRefresh]);
+
+  useEffect(() => {
+    setWaterClickerPollFunction(pollFunction);
+  }, []);
+
+  const [playing, toggle] = useAudio(SOUND_URL);
 
   return (
     <Flex alignSelf="center" maxWidth="500px" maxHeight="800px">
@@ -111,7 +155,9 @@ export default function Game3() {
             !
           </Header.h6>
           <Card.Body>
-            {currentFillState === 0 ? `You are currently out of clicks! Please check back in ${timeTillRefresh} seconds when you earn another drink.` : 'Try to get your personal high score of drinking the most water!  I heard there is a random secret that sometimes happens....'}
+            {currentFillState === 0
+              ? `You are currently out of clicks! Please check back in ${timeTillRefresh} seconds when you earn another drink.`
+              : 'Try to get your personal high score of drinking the most water!  I heard there is a random secret that sometimes happens....'}
           </Card.Body>
         </CustomCard>
       </Box>
