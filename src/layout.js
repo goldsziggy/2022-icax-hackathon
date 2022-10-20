@@ -16,7 +16,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 import AppContext from './app-context';
 
-// import { ReactComponent as Logo } from './assets/waterglass.svg';
 const ToolbarButton = styled(Button)``;
 const BaseBox = styled(Box)``;
 
@@ -30,8 +29,6 @@ const BoxAside = styled(BaseBox)`
 
 const FlexWrapper = styled(Flex)`
   text-align: center;
-  height: 100%;
-  width: 100%;
 `;
 
 const leftArea = (isMenuVisibile, setIsMenuVisibile) => (
@@ -50,7 +47,7 @@ const leftArea = (isMenuVisibile, setIsMenuVisibile) => (
 
 FlexWrapper.defaultProps = {
   flexDirection: 'column',
-  flexWrap: 'wrap',
+  // flexWrap: 'wrap',
 };
 
 export default function Layout() {
@@ -63,7 +60,7 @@ export default function Layout() {
   }), [example]);
 
   return (
-    <FlexWrapper className="layout" id="layout">
+    <FlexWrapper className="layout" id="layout" alignItems="stretch">
       <Toolbar
         bg="#8755D9"
         leftArea={leftArea(isMenuVisibile, setIsMenuVisibile)}
@@ -73,7 +70,7 @@ export default function Layout() {
         flex="1"
         order="1"
         justifyContent="center"
-        flexDirection="column"
+        flexDirection="row"
 
       >
         {isMenuVisibile ? (
@@ -101,6 +98,13 @@ export default function Layout() {
                   href="/2022-icax-hackathon/3"
                 >
                   Game 3
+                </Link>
+              </ListItem>
+              <ListItem>
+                <Link
+                  href="/2022-icax-hackathon/4"
+                >
+                  Game 4
                 </Link>
               </ListItem>
             </List>
