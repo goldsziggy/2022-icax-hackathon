@@ -1,0 +1,16 @@
+.bubble {
+    position: relative;
+    height: 50px;
+    width: 50px;
+}
+#screen {
+    background: '#F9E557';
+    height: '100vh';
+}
+.card {
+    border: ridge;
+    padding: 50px;
+    display: inline;
+    background:  #65EFCF;
+    /* margin: 10px; */
+}
