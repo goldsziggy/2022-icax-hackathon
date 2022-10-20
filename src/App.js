@@ -9,6 +9,7 @@ import Layout from './layout';
 import Game1 from './pages/game-1';
 import Game2 from './pages/game-2';
 import Game3 from './pages/game-3';
+import Game4 from './pages/game-4';
 
 export default function App() {
   return (
@@ -21,6 +22,7 @@ export default function App() {
           />
           <Route path="2" element={<Game2 />} />
           <Route path="3" element={<Game3 />} />
+          <Route path="4" element={<Game4 />} />
         </Route>
       </Routes>
     </BrowserRouter>
