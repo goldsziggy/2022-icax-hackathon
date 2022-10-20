@@ -8,23 +8,11 @@ import {
 import AppContext from './app-context';
 import Layout from './layout';
 
-import Game1, { getMessage, statReducer } from './pages/game-1';
+import Game1, { statReducer, defaultPetGameState } from './pages/game-1';
 import Game2 from './pages/game-2';
 import Game3 from './pages/game-3';
 import Game4 from './pages/game-4';
 
-export const defaultPetGameState = {
-  hydration: 100,
-  pain: { level: 0, lastHadPain: Date.now(), daysWithoutPain: 0 },
-  temperature: 68,
-  daysWithoutPain: 0,
-  antibiotics: { upToDate: false, lastGiven: null, streak: 0 },
-  shots: { upToDate: false, lastGiven: null },
-  currentTime: Date.now(),
-  message: getMessage('welcome'),
-  activeInfection: false,
-
-};
 function getInitialStateFromLocalStorage(itemName, defaultState) {
   const item = localStorage.getItem(itemName);
   return item ? JSON.parse(item) : defaultState;

@@ -85,7 +85,18 @@ export function getMessage(key, param) {
       return '';
   }
 }
+export const defaultPetGameState = {
+  hydration: 100,
+  pain: { level: 0, lastHadPain: Date.now(), daysWithoutPain: 0 },
+  temperature: 68,
+  daysWithoutPain: 0,
+  antibiotics: { upToDate: false, lastGiven: null, streak: 0 },
+  shots: { upToDate: false, lastGiven: null },
+  currentTime: Date.now(),
+  message: getMessage('welcome'),
+  activeInfection: false,
 
+};
 const StyledImage = styled.img`
   height: 50px;
   width: 50px;
@@ -160,6 +171,7 @@ export function statReducer(state, action) {
               : (Math.floor(100 * ((state.currentTime - newLastHadPain)
                 / (1000 * 60 * 60 * 24))) / 100),
         },
+        activeInfection: (state.shots.upToDate && state.antibiotics.upToDate) ? false : state.hydration < hydrationThreshold,
       };
     }
     default:
@@ -170,7 +182,7 @@ export default function Game1() {
   const { petGameState: state, setPetGamePollFunction, dispatchPetGameState: dispatch } = React.useContext(AppContext);
 
   React.useEffect(() => {
-    setPetGamePollFunction(() => (gameState, dispatch) => {
+    setPetGamePollFunction(() => (gameState) => {
       try {
         console.log('here', gameState);
         dispatch({ type: 'ADVANCE_TIME', value: millisecondsPerSecond });
@@ -181,7 +193,7 @@ export default function Game1() {
         console.log(e);
       }
     });
-  }, [setPetGamePollFunction]);
+  }, [dispatch, setPetGamePollFunction]);
 
   return (
     <Grid>
@@ -200,7 +212,7 @@ export default function Game1() {
           name="Days without pain"
           value={state.pain.daysWithoutPain}
         />
-        <StyledStat name="Med streak" value={getMessage('medStreak', state.antibiotics.streak)} />
+        <StyledStat name="Med streak" value={getMessage('medStreak', state.antibiotics.streak)} alert={state.antibiotics.streak === 0} />
         <StyledStat
           name="Current Date"
           value={`${new Date(state.currentTime).toLocaleDateString()}
