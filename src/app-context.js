@@ -10,7 +10,7 @@ const defaultState = {
   quizGameState: {},
   setQuizGameState: () => {},
   petGameState: {},
-  setPetGameState: () => {},
+  dispatchPetGameState: () => {},
   petGamePollFunction: () => {},
   setPetGamePollFunction: () => {},
   waterClickerState: {},

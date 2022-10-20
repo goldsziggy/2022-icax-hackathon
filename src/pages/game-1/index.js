@@ -6,8 +6,11 @@ import GirlSvg from './girl1.svg';
 import GlassOfWater from './glass-of-water.svg';
 import Syringe from './syringe.svg';
 import Pills from './pills.svg';
+import AppContext from '../../app-context';
 
-const hydrationThreshold = 30;
+export const hydrationThreshold = 30;
+export const millisecondsPerSecond = 600 * 1000; // default to one minute/sec
+
 function Stat({ className, name, value }) {
   return (
     <>
@@ -30,8 +33,10 @@ const Buttons = styled.div`
   padding: 0px;
   left: 0px;
   right: 0px;
+  width: 50px;
+  align-self: center;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-self: right;
 `;
 const StatsBox = styled.div`
@@ -54,14 +59,39 @@ const Message = styled.div`
   padding: 5px;
   align-self: center;
 `;
-function getHydrationMessage() {
-  return 'Keep it up! Drinking lots of water is key';
+export function getMessage(key, param) {
+  switch (key) {
+    case 'welcome':
+      return 'Hi! My name is _____ and I have sickle cell disease. Please take care of me!';
+    case 'hydration1':
+      return 'Keep it up! Drinking lots of water is key';
+    case 'hydration2':
+      return 'Water is life!';
+    case 'hydration3':
+      return 'I love drinking water!';
+    case 'hydration4':
+      return 'Aahhh, refreshing!';
+    case 'gaveAntibiotics':
+      return 'Excellent! Daily antibiotic use can prevent infections';
+    case 'medStreak':
+      return `${param} ${param === 1 ? 'day' : 'days'} in a row`;
+    case 'vaccination':
+      return "Great job! It's important to stay up-to-date on your shots to prevent infections";
+    case 'vaccinationsUpToDate':
+      return "You're up-to-date on your shots!";
+    case 'antibioticsWait':
+      return 'You already gave antibiotics today! Wait at least 12 hours';
+    default:
+      return '';
+  }
 }
 
 const StyledImage = styled.img`
   height: 50px;
   width: 50px;
-  border: 1px solid black;
+  border: 2px solid #65EFCF;
+  opacity: ${(p) => (p.enabled ? 1 : 0.25)};
+  border-radius:10px;
   padding: 5px;
   margin: 5px;
 `;
@@ -72,58 +102,79 @@ const Grid = styled.div`
   width: 100%;
   height: 100%;
 `;
-
-function statReducer(state, action) {
+export function statReducer(state, action) {
+  console.log('called');
   switch (action.type) {
     case 'GIVE_WATER':
       return {
         ...state,
-        hydration: state.hydration + action.value,
-        message: getHydrationMessage(),
+        hydration: Math.min(100, state.hydration + action.value),
+        message: getMessage(`hydration${state.hydration % 4 + 1}`),
       };
     case 'GIVE_SHOT':
       return {
         ...state,
         shots: { upToDate: true, lastGiven: state.currentTime },
         message:
-          "Great! It' important to stay up-to-date on your shots to prevent infections",
+          getMessage(state.shots.upToDate ? 'vaccinationsUpToDate' : 'vaccination'),
       };
     case 'GIVE_ANTIBIOTICS':
-      return {
-        ...state,
-        antibiotics: { upToDate: true, lastGiven: state.currentTime },
-      };
-    case 'ADVANCE_TIME':
+    {
+      const oneDay = 1000 * 60 * 60 * 24;
+      const halfDay = oneDay / 2;
+      const timeSinceLastGiven = state.currentTime - state.antibiotics.lastGiven;
+      if (timeSinceLastGiven > halfDay) {
+        return {
+          ...state,
+          message: getMessage('gaveAntibiotics'),
+          antibiotics: { upToDate: true, lastGiven: state.currentTime, streak: state.antibiotics.streak + 1 },
+        };
+      }
+      return { ...state, message: getMessage('antibioticsWait') };
+    }
+    case 'ADVANCE_TIME': {
+      const newPainLevel = state.hydration > hydrationThreshold
+        ? 0
+        : Math.floor(
+          -10 * ((state.hydration - hydrationThreshold) / hydrationThreshold),
+        );
+      const newLastHadPain = state.pain.level > 0 ? state.currentTime : state.pain.lastHadPain;
       return {
         ...state,
         currentTime: state.currentTime + action.value,
-        hydration: state.hydration - 1,
-        pain: state.hydration > hydrationThreshold ? 0 : 1,
+        hydration: Math.max(0, state.hydration - 1),
+        pain: {
+          ...state.pain,
+          level: newPainLevel,
+          lastHadPain: newLastHadPain,
+          daysWithoutPain:
+            newPainLevel > 0
+              ? 0
+              : (Math.floor(100 * ((state.currentTime - newLastHadPain)
+                / (1000 * 60 * 60 * 24))) / 100),
+        },
       };
+    }
     default:
       throw new Error();
   }
 }
-
 export default function Game1() {
-  const [state, dispatch] = React.useReducer(statReducer, {
-    hydration: 100,
-    pain: 0,
-    temperature: 68,
-    daysWithoutPain: 0,
-    medStreak: 0,
-    antibiotics: { upToDate: false, lastGiven: null },
-    shots: { upToDate: false, lastGiven: null },
-    currentTime: Date.now(),
-    message: 'hello!',
-  });
+  const { petGameState: state, setPetGamePollFunction, dispatchPetGameState: dispatch } = React.useContext(AppContext);
 
   React.useEffect(() => {
-    const interval = setInterval(() => {
-      dispatch({ type: 'ADVANCE_TIME', value: 60 * 1000 });
-    }, 1000);
-    return () => clearInterval(interval);
-  });
+    setPetGamePollFunction(() => (gameState, dispatch) => {
+      try {
+        console.log('here', gameState);
+        dispatch({ type: 'ADVANCE_TIME', value: millisecondsPerSecond });
+        if (gameState.hydration === 50) {
+          return 'getting thirsty';
+        }
+      } catch (e) {
+        console.log(e);
+      }
+    });
+  }, [setPetGamePollFunction]);
 
   return (
     <Grid>
@@ -135,12 +186,16 @@ export default function Game1() {
             state.hydration !== null && state.hydration < hydrationThreshold
           }
         />
-        <StyledStat name="Pain" value={`${state.pain}`} />
+        <StyledStat name="Pain" value={`${state.pain.level}`} />
+        <StyledStat name="Active Infection?" value={`${state.activeInfection ? 'yes' : 'no'}`} alert={state.activeInfection} />
         <StyledStat name="Temperature" value={`${state.temperature}°F`} />
-        <StyledStat name="Days without pain" value={state.daysWithoutPain} />
-        <StyledStat name="Med streak" value={state.medStreak} />
         <StyledStat
-          name="Time"
+          name="Days without pain"
+          value={state.pain.daysWithoutPain}
+        />
+        <StyledStat name="Med streak" value={getMessage('medStreak', state.antibiotics.streak)} />
+        <StyledStat
+          name="Current Date"
           value={`${new Date(state.currentTime).toLocaleDateString()}
           
           ${new Date(state.currentTime).toLocaleTimeString()}`}
@@ -149,18 +204,21 @@ export default function Game1() {
       <Buttons>
         <StyledImage
           src={GlassOfWater}
+          enabled={state.hydration < 100}
           onClick={() => {
             dispatch({ type: 'GIVE_WATER', value: 10 });
           }}
         />
         <StyledImage
           src={Syringe}
+          enabled={!state.shots.upToDate}
           onClick={() => {
             dispatch({ type: 'GIVE_SHOT' });
           }}
         />
         <StyledImage
           src={Pills}
+          enabled={!state.antibiotics.upToDate}
           onClick={() => {
             dispatch({ type: 'GIVE_ANTIBIOTICS' });
           }}
