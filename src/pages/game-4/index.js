@@ -155,7 +155,9 @@ export default function WaterClicker() {
             !
           </Header.h6>
           <Card.Body>
-            {currentFillState === 0 ? `You are currently out of clicks! Please check back in ${timeTillRefresh} seconds when you earn another drink.` : 'Try to get your personal high score of drinking the most water!  I heard there is a random secret that sometimes happens....'}
+            {currentFillState === 0
+              ? `You are currently out of clicks! Please check back in ${timeTillRefresh} seconds when you earn another drink.`
+              : 'Try to get your personal high score of drinking the most water!  I heard there is a random secret that sometimes happens....'}
           </Card.Body>
         </CustomCard>
       </Box>
