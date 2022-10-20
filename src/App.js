@@ -12,13 +12,18 @@ import Game2 from './pages/game-2';
 import Game3 from './pages/game-3';
 import Game4 from './pages/game-4';
 
+function getInitialStateFromLocalStorage(itemName, defaultState) {
+  const item = localStorage.getItem(itemName);
+  return item ? JSON.parse(item) : defaultState;
+}
+
 export default function App() {
   const [notifications, setNotifications] = useState([]);
-  const [matchingGameState, setMatchingGameState] = useState({});
-  const [quizGameState, setQuizGameState] = useState({});
-  const [petGameState, setPetGameState] = useState({});
+  const [matchingGameState, setMatchingGameState] = useState(getInitialStateFromLocalStorage('matchingGameState', {}));
+  const [quizGameState, setQuizGameState] = useState(getInitialStateFromLocalStorage('quizGameState', {}));
+  const [petGameState, setPetGameState] = useState(getInitialStateFromLocalStorage('petGameState', {}));
+  const [waterClickerState, setWaterClickerState] = useState(getInitialStateFromLocalStorage('waterClickerGameState', {}));
   const [petGamePollFunction, setPetGamePollFunction] = useState(() => {});
-  const [waterClickerState, setWaterClickerState] = useState({});
   const [waterClickerPollFunction, setWaterClickerPollFunction] = useState(() => {});
 
   const sharedState = useMemo(() => ({
@@ -83,6 +88,13 @@ export default function App() {
     }, 1000);
     return () => clearInterval(interval);
   }, [matchingGameState, petGameState, waterClickerState, quizGameState, notifications]);
+
+  useEffect(() => {
+    localStorage.setItem('matchingGameState', JSON.stringify(matchingGameState));
+    localStorage.setItem('quizGameState', JSON.stringify(quizGameState));
+    localStorage.setItem('petGameState', JSON.stringify(petGameState));
+    localStorage.setItem('waterClickerGameState', JSON.stringify(waterClickerState));
+  }, [matchingGameState, petGameState, waterClickerState, quizGameState]);
 
   return (
     <AppContext.Provider value={sharedState}>
