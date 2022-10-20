@@ -75,7 +75,6 @@ export default function Game3() {
       const remainingTime = 30 - (Date.now() - timeLastClicked) / 1000;
       setTimeTillRefresh(parseInt(remainingTime));
       if (remainingTime <= 0) {
-        setNumberOfClicks(3);
         setCurrentFillState(3);
       }
     }, 1000);
