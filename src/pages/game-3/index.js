@@ -18,9 +18,15 @@ class Game3 extends React.Component {
         { name: 'Cell7', image: 'BloodFlow.jpeg' },
         { name: 'Cell8', image: 'prevent.jpeg' },
       ],
-      CardClickCount: 0,
-
+cardCounter: 0,
     };
+  }
+
+  incrementCounter = (t)=> {
+    console.log('D testing callback function', t.target.innerHTML);
+    if(t.target.innerHTML === '<p>Test</p>') {
+      this.setState({cardCounter: this.state.cardCounter +1})
+    }
   }
 
   render() {
@@ -30,13 +36,13 @@ class Game3 extends React.Component {
         <div className="cardGroup">
           {this.state.cardsSet1.map((card) => (
 
-            <Card cardName={card.name} imageName={card.image} />
+            <Card cardName={card.name} imageName={card.image} recordClickEvent={this.incrementCounter} />
           ))}
         </div>
         <div className="cardGroup">
           {this.state.cardsSet2.map((card) => (
 
-            <Card cardName={card.name} imageName={card.image} />
+            <Card cardName={card.name} imageName={card.image} recordClickEvent={this.incrementCounter}/>
           ))}
         </div>
       </div>

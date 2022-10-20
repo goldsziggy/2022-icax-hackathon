@@ -16,13 +16,16 @@ class Card extends React.Component {
   handleChange(e) {
     e.preventDefault();
     this.setState({ isFlipped: !this.state.isFlipped });
+    this.props.recordClickEvent(e);
   }
 
   render() {
     return (
       <ReactCardFlip isFlipped={this.state.isFlipped} flipDirection="vertical">
         {/* Front Card */}
-        <div className="card" onClick={this.handleChange} />
+        <div className="card" onClick={this.handleChange}>
+          <p>Test</p>
+        </div>
         {/* Back Card */}
         <div className="card" onClick={this.handleChange}>
           <div>
@@ -37,5 +40,6 @@ class Card extends React.Component {
 Card.propTypes = {
   imageNeme: PropTypes.string,
   cardName: PropTypes.string,
+  recordClickEvent: PropTypes.func,
 };
 export default Card;
