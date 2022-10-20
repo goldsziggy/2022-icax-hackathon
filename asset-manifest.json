@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/2022-icax-hackathon/static/css/main.3da4c4fe.css",
+    "main.js": "/2022-icax-hackathon/static/js/main.e5ab114d.js",
+    "static/media/waterglass.svg": "/2022-icax-hackathon/static/media/waterglass.661f5053e831686439f1431d9de834b2.svg",
+    "index.html": "/2022-icax-hackathon/index.html",
+    "main.3da4c4fe.css.map": "/2022-icax-hackathon/static/css/main.3da4c4fe.css.map",
+    "main.e5ab114d.js.map": "/2022-icax-hackathon/static/js/main.e5ab114d.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.3da4c4fe.css",
+    "static/js/main.e5ab114d.js"
+  ]
+}
