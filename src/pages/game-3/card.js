@@ -16,6 +16,7 @@ class Card extends React.Component {
   handleChange(e) {
     e.preventDefault();
     this.setState({ isFlipped: !this.state.isFlipped });
+    console.log(e.target);
     this.props.recordClickEvent(e);
   }
 
@@ -23,17 +24,18 @@ class Card extends React.Component {
     return (
       <ReactCardFlip isFlipped={this.state.isFlipped} flipDirection="vertical">
         {/* Front Card */}
-        <div className="card" onClick={this.handleChange}>
+        <div id={this.props.cardName} className="card" onClick={this.handleChange}>
           <p>Test</p>
         </div>
         {/* Back Card */}
-        <div className="card" onClick={this.handleChange}>
+        <div className={this.props.cardDisabled ? 'card dis' : 'card'} onClick={this.handleChange}>
           <div>
             <img value={this.props.cardName} className="cardimg" src={`${process.env.PUBLIC_URL}/${this.props.imageName}`} alt="cell" />
           </div>
 
         </div>
       </ReactCardFlip>
+
     );
   }
 }
