@@ -85,7 +85,7 @@ export default function App() {
       }
 
       if (waterClickerPollFunction) {
-        const message = waterClickerPollFunction(waterClickerState, setWaterClickerState);
+        const message = waterClickerPollFunction(waterClickerState, setWaterClickerState, language);
         if (message && message.length > 0) {
           const id = crypto.randomUUID();
           setNotifications([...notifications, { message, id }]);
