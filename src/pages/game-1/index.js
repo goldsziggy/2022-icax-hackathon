@@ -27,28 +27,48 @@ const StyledStat = styled(Stat)`
 `;
 const Girl = styled.div`
 align-self:center;
-justify-self: middle;
-animation-timing-function: ease;
-animation-duration: 6s;
-transition-property: all;
+
+
+#path162 {
+  animation-iteration-count: infinite;
+  animation-play-state: running;
+  animation-duration: .5s;
+  animation-direction: alternate;
+  animation-delay: 3s;
+  animation-name: wave;
+}
+
+@keyframes wave {
+  from {transform: rotate(0deg);}
+  to {transform: rotate(20deg) translateX(4px) translateY(-2px);}
+}
+
+
 ${(props) => {
     if (props.sick) {
       return css`
     #path874 {
       fill: yellow !important;
       fill-opacity: .8 !important;
-      transition-delay: 5s;
-      animation-duration: 5s;
-      transition-property: all;
+      
+    }
+
+    #path898 {
+      animation-name: frown;
+      animation-duration: 1.2s;
+      animation-iteration-count: infinite;
+    }
+
+    @keyframes frown {
+      from {transform: translateY(0);}
+      to {transform: translateY(-4px);}
     }
     `;
     } return css`
     #path874 {
       fill: white !important;
       fill-opacity: 1 !important;
-      transition-delay: 5s;
-      animation-duration: 5s;
-      transition-property: all;
+   
     }
     `;
   }}
@@ -67,7 +87,7 @@ const Buttons = styled.div`
 `;
 const StatsBox = styled.div`
   margin-right: 10px;
-  margin-top: 30px;
+  margin-top: 40px;
   margin-left: 10px;
   font-family: Skia;
   font-size: 15px;
@@ -137,6 +157,20 @@ const StyledImage = styled.img`
   border-radius:10px;
   padding: 5px;
   margin: 5px;
+  ${(p) => (p.enabled ? css`
+  animation-name: swell;
+  animation-playing-state: running;
+  animation-duration: 2s;
+  animation-direction: alternate;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  
+
+  @keyframes swell {
+    from {transform: scale(1.0); opacity: 1.0}
+    to {transform: scale(1.05); opacity: 0.8}
+  }
+  ` : '')}
 `;
 const Grid = styled.div`
   position: absolute;
@@ -266,9 +300,8 @@ export default function Game1() {
             state.hydration !== null && state.hydration < hydrationThreshold
           }
         />
-        <StyledStat name="Pain" value={`${state.pain.level}`} />
+        <StyledStat name="Pain" value={`${state.pain.level}/10`} />
         <StyledStat name="Active Infection?" value={`${state.activeInfection ? 'yes' : 'no'}`} alert={state.activeInfection} />
-        <StyledStat name="Temperature" value={`${state.temperature}°F`} />
         <StyledStat
           name="Days without pain"
           value={state.pain.daysWithoutPain}
