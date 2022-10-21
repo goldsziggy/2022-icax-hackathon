@@ -13,6 +13,15 @@ class Card extends React.Component {
     this.handleChange = this.handleChange.bind(this);
   }
 
+  componentDidUpdate(prevProps) {
+    // reFliping the cards when they don't match
+    if (this.props.reFlipInd !== prevProps.reFlipInd) {
+      if (this.props.reFlipInd) {
+        this.setState({ isFlipped: !this.props.reFlipInd });
+      }
+    }
+  }
+
   handleChange(e) {
     e.preventDefault();
     this.setState({ isFlipped: !this.state.isFlipped });

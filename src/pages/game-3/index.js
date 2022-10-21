@@ -7,20 +7,19 @@ class Game3 extends React.Component {
     super(props);
     this.state = {
       cardsSet1: [
-        { name: 'Cell1', image: 'Cell.png', carddisabled: false },
-        { name: 'Cell2', image: 'prevent.jpeg', carddisabled: false },
-        { name: 'Cell3', image: 'BloodFlow.jpeg', carddisabled: false },
-        { name: 'Cell4', image: 'Triggers.jpg', carddisabled: false },
+        { name: 'Cell1', image: 'Cell.png', carddisabled: false, reFlipCard: false},
+        { name: 'Cell2', image: 'prevent.jpeg', carddisabled: false, reFlipCard: false },
+        { name: 'Cell3', image: 'BloodFlow.jpeg', carddisabled: false, reFlipCard: false },
+        { name: 'Cell4', image: 'Triggers.jpg', carddisabled: false, reFlipCard: false },
       ],
       cardsSet2: [
-        { name: 'Cell5', image: 'Triggers.jpg', carddisabled: false },
-        { name: 'Cell6', image: 'Cell.png', carddisabled: false },
-        { name: 'Cell7', image: 'BloodFlow.jpeg', carddisabled: false },
-        { name: 'Cell8', image: 'prevent.jpeg', carddisabled: false },
+        { name: 'Cell5', image: 'Triggers.jpg', carddisabled: false, reFlipCard: false },
+        { name: 'Cell6', image: 'Cell.png', carddisabled: false, reFlipCard: false},
+        { name: 'Cell7', image: 'BloodFlow.jpeg', carddisabled: false, reFlipCard: false },
+        { name: 'Cell8', image: 'prevent.jpeg', carddisabled: false, reFlipCard: false },
       ],
 cardCounter: 0,
 cardData: [],
-ReFlipCard: false,
     };
 
   }
@@ -35,7 +34,14 @@ ReFlipCard: false,
           if(this.state.cardData[0] !== this.state.cardData[1]) {
             // flip them back and reset counter
             console.log("testing")
-            this.setState({ReFlipCard: true})
+           let ns1 = [... this.state.cardsSet1];
+           let ind = ns1.findIndex((ele) => ele.image === this.state.cardData[0])
+           ns1[ind].reFlipCard = true;
+           
+           let ns2 = [... this.state.cardsSet2];
+           let ind2 = ns2.findIndex((ele) => ele.image === this.state.cardData[1])
+           ns2[ind2].reFlipCard = true;
+           this.setState({cardsSet1: ns1, cardsSet2: ns2, cardCounter: 0, cardData: []})
   
           } else{
              // if count is 2 and the cards are same - then diable them from clicking and reset counter
@@ -73,6 +79,7 @@ ReFlipCard: false,
             recordClickEvent={this.incrementCounter} 
             reFlip={this.state.ReFlipCard}
             cardDisabled={card.carddisabled}
+            reFlipInd={card.reFlipCard}
             />
           ))}
         </div>
@@ -86,6 +93,7 @@ ReFlipCard: false,
             recordClickEvent={this.incrementCounter} 
             reFlip={this.state.ReFlipCard}
             cardDisabled={card.carddisabled}
+            reFlipInd={card.reFlipCard}
             />
           ))}
         </div>
