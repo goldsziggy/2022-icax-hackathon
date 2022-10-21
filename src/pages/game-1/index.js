@@ -248,7 +248,7 @@ export default function Game1() {
   } = React.useContext(AppContext);
 
   React.useEffect(() => {
-    setPetGamePollFunction(() => (gameState) => {
+    setPetGamePollFunction(() => (gameState, a, language) => {
       try {
         dispatch({ type: 'ADVANCE_TIME', value: millisecondsPerSecond });
         if (gameState.hydration === 50) {
