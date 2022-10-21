@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/2022-icax-hackathon/static/css/main.8c853cae.css",
-    "main.js": "/2022-icax-hackathon/static/js/main.3af419e3.js",
+    "main.js": "/2022-icax-hackathon/static/js/main.7e055cfc.js",
     "static/media/pills.svg": "/2022-icax-hackathon/static/media/pills.2bc84f32824884b6bc08f6e6a902dff4.svg",
     "static/media/syringe.svg": "/2022-icax-hackathon/static/media/syringe.f94f19566879919bc34ac2c8c8ce16dd.svg",
     "static/media/sickgirl.svg": "/2022-icax-hackathon/static/media/sickgirl.806b46ea3c3ae88a5b880e0d82a2a453.svg",
@@ -11,10 +11,10 @@
     "static/media/glass-of-water.svg": "/2022-icax-hackathon/static/media/glass-of-water.41dbad5558853dd3609adfac8f85b215.svg",
     "index.html": "/2022-icax-hackathon/index.html",
     "main.8c853cae.css.map": "/2022-icax-hackathon/static/css/main.8c853cae.css.map",
-    "main.3af419e3.js.map": "/2022-icax-hackathon/static/js/main.3af419e3.js.map"
+    "main.7e055cfc.js.map": "/2022-icax-hackathon/static/js/main.7e055cfc.js.map"
   },
   "entrypoints": [
     "static/css/main.8c853cae.css",
-    "static/js/main.3af419e3.js"
+    "static/js/main.7e055cfc.js"
   ]
 }
