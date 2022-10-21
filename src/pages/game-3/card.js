@@ -17,6 +17,7 @@ class Card extends React.Component {
     // reFliping the cards when they don't match
     if (this.props.reFlipInd !== prevProps.reFlipInd) {
       if (this.props.reFlipInd) {
+        console.log('D', this.props.id);
         this.setState({ isFlipped: !this.props.reFlipInd });
       }
     }
@@ -25,7 +26,6 @@ class Card extends React.Component {
   handleChange(e) {
     e.preventDefault();
     this.setState({ isFlipped: !this.state.isFlipped });
-    console.log(e.target);
     this.props.recordClickEvent(e);
   }
 
@@ -34,7 +34,7 @@ class Card extends React.Component {
       <ReactCardFlip isFlipped={this.state.isFlipped} flipDirection="vertical">
         {/* Front Card */}
         <div id={this.props.cardName} className="card" onClick={this.handleChange}>
-          <p>Test</p>
+          <p />
         </div>
         {/* Back Card */}
         <div className={this.props.cardDisabled ? 'card dis' : 'card'} onClick={this.handleChange}>

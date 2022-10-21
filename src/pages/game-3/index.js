@@ -27,26 +27,31 @@ cardData: [],
   incrementCounter = (t)=> {
     //capture them in a array and increment the counter only if the front is flipped to back
     this.setState({cardData: [...this.state.cardData, t.target.id.substring(0,t.target.id.length -2) ]})
-    if(t.target.innerHTML === '<p>Test</p>') {
+    if(t.target.innerHTML === '<p></p>') {
       this.setState({cardCounter: this.state.cardCounter +1}, () => {
         if(this.state.cardCounter == 2) {
           // check if cards are different
           if(this.state.cardData[0] !== this.state.cardData[1]) {
             // flip them back and reset counter
-            console.log("testing")
-           let ns1 = [... this.state.cardsSet1];
-           let ind = ns1.findIndex((ele) => ele.image === this.state.cardData[0])
-           ns1[ind].reFlipCard = true;
-           
-           let ns2 = [... this.state.cardsSet2];
-           let ind2 = ns2.findIndex((ele) => ele.image === this.state.cardData[1])
-           ns2[ind2].reFlipCard = true;
-           this.setState({cardsSet1: ns1, cardsSet2: ns2, cardCounter: 0, cardData: []})
+            setTimeout(() => {   
+              let ns1 = [... this.state.cardsSet1];
+              let ind = ns1.findIndex((ele) => ele.image === this.state.cardData[0])
+              ns1[ind].reFlipCard = true;
+              this.setState({cardSet1: ns1})
+              
+              let ns2 = [... this.state.cardsSet2];
+              let ind2 = ns2.findIndex((ele) => ele.image === this.state.cardData[1])
+              ns2[ind2].reFlipCard = true;
+              this.setState({cardsSet2: ns2, cardCounter: 0, cardData: [] })
+
+            }, 1000);
+          
   
           } else{
              // if count is 2 and the cards are same - then diable them from clicking and reset counter
             let newState1 = [... this.state.cardsSet1];
             let ind = newState1.findIndex((ele) => ele.image === this.state.cardData[0])
+            console.log(ind)
             newState1[ind].carddisabled = true;
             console.log(newState1)
 
@@ -77,7 +82,6 @@ cardData: [],
             cardName={`${card.image}_1`} 
             imageName={card.image} 
             recordClickEvent={this.incrementCounter} 
-            reFlip={this.state.ReFlipCard}
             cardDisabled={card.carddisabled}
             reFlipInd={card.reFlipCard}
             />
@@ -91,7 +95,6 @@ cardData: [],
             cardName={`${card.image}_2`} 
             imageName={card.image} 
             recordClickEvent={this.incrementCounter} 
-            reFlip={this.state.ReFlipCard}
             cardDisabled={card.carddisabled}
             reFlipInd={card.reFlipCard}
             />
