@@ -1,7 +1,11 @@
 {
   "eng": {
     "wordle": {
-      "wordlist": ["sickle", "cell", "jaundice"],
+      "wordlist": [
+        "sickle",
+        "cell",
+        "jaundice"
+      ],
       "errors": {
         "maxLengthErr": "Please specify all characters in the word",
         "wordErr": "It's ok, try again!",
@@ -29,13 +33,31 @@
         "notification": "Water Clicker has refreshed!"
       }
     },
-    "game1": {},
+    "docktr": {
+      "welcome": "Hi! My name is Claire and I have sickle cell disease. Please take care of me!",
+      "hydration1": "Keep it up! Drinking lots of water is key",
+      "hydration2": "Water is life!",
+      "hydration3": "I love drinking water!",
+      "hydration4": "Aahhh, so refreshing!",
+      "gaveAntibiotics": "Excellent! Daily antibiotic use can help prevent infections",
+      "medStreak": "doses in a row",
+      "medStreakOne": "dose in a row",
+      "vaccination": "Great job! It's important to stay up-to-date on your shots to prevent infections",
+      "vaccinationsUpToDate": "You're up-to-date on your shots. Wonderful!",
+      "antibioticsWait": "You already gave me antibiotics! Wait at least 12 hours for the next dose",
+      "notFeelingGood": "I'm not feeling so good...",
+      "feelingBetter": "Thanks, I'm feeling much better now!"
+    },
     "game2": {},
     "game3": {}
   },
   "esp": {
     "wordle": {
-      "wordlist": ["hoz", "célula", "ictericia"],
+      "wordlist": [
+        "hoz",
+        "célula",
+        "ictericia"
+      ],
       "errors": {
         "maxLengthErr": "Por favor, especifique todos los caracteres de la palabra",
         "wordErr": "¡Está bien, inténtalo de nuevo!",
@@ -63,7 +85,21 @@
         "notification": "Water Clicker se ha actualizado!"
       }
     },
-    "game1": {},
+    "docktr": {
+      "welcome": "¡Hola! Me llamo Claire y tengo la enfermedad de células falciformes. ¡Cuídame por favor!",
+      "hydration1": "¡Eso es! Es clave tomar mucha agua",
+      "hydration2": "El agua es vida!",
+      "hydration3": "Me encanta tomar agua!",
+      "hydration4": "Aahhh, ¡que rico!",
+      "gaveAntibiotics": "Excelente! Tomar antibióticos diariamente puede ayudar a prevenir las infecciones",
+      "medStreak": "dosis consecutivas",
+      "medStreakOne": "dosis consecutiva",
+      "vaccination": "¡Bien hecho! Es muy importante tener todas tus vacunas para prevenir infecciones",
+      "vaccinationsUpToDate": "Tienes todas tus vacunas. ¡Estupendo!",
+      "antibioticsWait": "¡Ya me diste antibióticos! Espera por lo menos 12 horas para la siguiente dosis",
+      "notFeelingGood": "No me siento tan bien...",
+      "feelingBetter": "¡Gracias! ahora me siento mucho mejor."
+    },
     "game2": {},
     "game3": {}
   }
