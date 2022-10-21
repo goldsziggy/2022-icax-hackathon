@@ -1,0 +1,49 @@
+.App {
+    text-align: center;
+    background-image: url("./blood-drop.jpg");
+}
+
+.question-card {
+    background-color: #DB5AA8;
+    margin: 0 auto;
+    padding: 16px;
+    border-radius: 16px;
+    color: black;
+    width: 80%;
+    height: auto;
+}
+
+ul {
+    list-style: none;
+}
+
+li {
+    background-color: #65EFCF;
+    padding: 16px;
+    border: 3px solid white;
+    border-radius: 20px;
+    font-size: 20px;
+    margin-top: 8px;
+}
+
+.final-results {
+    background-color: #F9E557;
+    margin: 0 auto;
+    padding: 16px;
+    border-radius: 16px;
+    color: #F8F8FF;
+    width: 50%;
+    height: auto;
+}
+
+.button {
+    background-color: red;
+    border: none;
+    color: white;
+    padding: 16px 24px;
+    text-align: center;
+    display: inline-block;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 24px;
+}

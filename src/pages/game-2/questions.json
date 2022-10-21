@@ -1,0 +1,252 @@
+[
+    {
+        "question": "Why is Sickle Cell Disease (SCD) so damaging to those with the condition?",
+        "choices": [
+           {
+              "id": 0,
+              "text": "The sickle-shaped cells are too sharp for arteries and veins",
+              "isCorrect": false
+           },
+           {
+              "id": 1,
+              "text": "It inhibits the ability of hemoglobin in red blood cells to carry oxygen",
+              "isCorrect": true
+           },
+           {
+              "id": 2,
+              "text": "There is no way to mitigate the pain or complications",
+              "isCorrect": false
+           },
+           {
+              "id": 3,
+              "text": "Individuals can pass on the disease through hugging or touching their friends and family",
+              "isCorrect": false
+           }
+        ]
+     },
+    {
+       "question": "What is a flare-up of pain called in someone with SCD?",
+       "choices": [
+          {
+             "id": 0,
+             "text": "Praxis",
+             "isCorrect": false
+          },
+          {
+             "id": 1,
+             "text": "Sepsis",
+             "isCorrect": false
+          },
+          {
+             "id": 2,
+             "text": "Crisis",
+             "isCorrect": true
+          },
+          {
+             "id": 3,
+             "text": "Lupus",
+             "isCorrect": false
+          }
+       ]
+    },
+    {
+       "question": "If a person carries one altered copy of the hemoglobin gene and has no clinical symptoms, they have _____.",
+       "choices": [
+          {
+             "id": 0,
+             "text": "No chance of passing on the disease",
+             "isCorrect": false
+          },
+          {
+             "id": 1,
+             "text": "Sickle Cell Trait",
+             "isCorrect": true
+          },
+          {
+             "id": 2,
+             "text": "A high risk of developing SCD later in life",
+             "isCorrect": false
+          },
+          {
+             "id": 3,
+             "text": "Sickle Cell Trace",
+             "isCorrect": false
+          }
+       ]
+    },
+    {
+       "question": "What are some warning signs for someone with SCD to see a medical professional immediately?",
+       "choices": [
+          {
+             "id": 0,
+             "text": "Waking up with a leg cramp",
+             "isCorrect": false
+          },
+          {
+             "id": 1,
+             "text": "Indigestion, bloating, and gas",
+             "isCorrect": false
+          },
+          {
+             "id": 2,
+             "text": "Tooth and ear pain",
+             "isCorrect": false
+          },
+          {
+             "id": 3,
+             "text": "Fever, chest pain, trouble breathing, and/or sudden changes in vision",
+             "isCorrect": true
+          }
+       ]
+    },
+    {
+       "question": "What are some triggers of a pain crisis?",
+       "choices": [
+          {
+             "id": 0,
+             "text": "Extreme temperatures, overexercising, high altitudes",
+             "isCorrect": true
+          },
+          {
+             "id": 1,
+             "text": "Walking, sitting at a desk for too long",
+             "isCorrect": false
+          },
+          {
+             "id": 2,
+             "text": "Overeating, oversleeping",
+             "isCorrect": false
+          },
+          {
+             "id": 3,
+             "text": "Loud sounds, bright lights, pungent tastes",
+             "isCorrect": false
+          }
+       ]
+    },
+    {
+       "question": "Currently, what is the only FDA-approved therapy that could potentially cure SCD?",
+       "choices": [
+          {
+             "id": 0,
+             "text": "Radiation therapy",
+             "isCorrect": false
+          },
+          {
+             "id": 1,
+             "text": "CRISPR gene editing",
+             "isCorrect": false
+          },
+          {
+             "id": 2,
+             "text": "Stem cell transplant",
+             "isCorrect": true
+          },
+          {
+             "id": 3,
+             "text": "Hydration therapy",
+             "isCorrect": false
+          }
+       ]
+    },
+    {
+       "question": "Approximately how many Americans are affected by SCD today?",
+       "choices": [
+          {
+             "id": 0,
+             "text": "25,000",
+             "isCorrect": false
+          },
+          {
+             "id": 1,
+             "text": "70,000-100,000",
+             "isCorrect": true
+          },
+          {
+             "id": 2,
+             "text": "50,000",
+             "isCorrect": false
+          },
+          {
+             "id": 3,
+             "text": "150,000-200,000",
+             "isCorrect": false
+          }
+       ]
+    },
+    {
+       "question": "What is the best way to determine if someone carries the Sickle Cell Trait?",
+       "choices": [
+          {
+             "id": 0,
+             "text": "An ancestry test",
+             "isCorrect": false
+          },
+          {
+             "id": 1,
+             "text": "An MRI scan",
+             "isCorrect": false
+          },
+          {
+             "id": 2,
+             "text": "An IQ test",
+             "isCorrect": false
+          },
+          {
+             "id": 3,
+             "text": "Blood and genetic tests",
+             "isCorrect": true
+          }
+       ]
+    },
+    {
+       "question": "What are some common treatments for people with SCD?",
+       "choices": [
+          {
+             "id": 0,
+             "text": "Speech therapy and physiotherapy",
+             "isCorrect": false
+          },
+          {
+             "id": 1,
+             "text": "Staying hydrated, up-to-date on vaccinations, and taking pain medication",
+             "isCorrect": false
+          },
+          {
+             "id": 2,
+             "text": "Eating spicy and sugary foods to boost immunity",
+             "isCorrect": true
+          },
+          {
+             "id": 3,
+             "text": "Running 5 miles a day to build muscle strength",
+             "isCorrect": false
+          }
+       ]
+    },
+    {
+       "question": "How can teachers and peers of a teen with SCD offer support?",
+       "choices": [
+          {
+             "id": 0,
+             "text": "Ensuring access to water and bathroom breaks, watching for signs of stroke, taking special care of injuries",
+             "isCorrect": true
+          },
+          {
+             "id": 1,
+             "text": "Allowing them to skip mid-terms and final examinations",
+             "isCorrect": false
+          },
+          {
+             "id": 2,
+             "text": "Bringing them their favorite snacks and candy",
+             "isCorrect": false
+          },
+          {
+             "id": 3,
+             "text": "Enrolling them in ballroom-dancing lessons to improve agility",
+             "isCorrect": false
+          }
+       ]
+    }
+ ]
