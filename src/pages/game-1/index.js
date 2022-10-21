@@ -109,6 +109,8 @@ export function getMessage(key, param) {
       return "You're up-to-date on your shots. Wonderful!";
     case 'antibioticsWait':
       return 'You already gave me antibiotics! Wait at least 12 hours for the next dose';
+    case 'notFeelingGood':
+      return 'I\'m not feeling so good...';
     case 'feelingBetter':
       return 'Thanks, I\'m feeling much better now!';
     default:
@@ -159,6 +161,9 @@ function maybeGetInfected(state) {
 function messageReducer(state, newActiveInfection) {
   if (state.activeInfection && !newActiveInfection) {
     return { text: getMessage('feelingBetter'), posted: Date.now() };
+  }
+  if (!state.activeInfection && newActiveInfection) {
+    return { text: getMessage('notFeelingGood'), posted: Date.now() };
   }
   if (Date.now() - state.message.posted > 5000) {
     return { text: '', posted: null };
