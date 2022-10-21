@@ -1,0 +1,34 @@
+.cardimg {
+    position: relative;
+    height: 8rem;
+    width: 8rem;
+    border: ridge;
+}
+
+#screen {
+    background: '#F9E557';
+    height: '100vh';
+}
+
+.card {
+    border: ridge;
+    padding: 10px;
+    background: #65EFCF;
+    height: 8rem;
+    width: 8rem;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.cardGroup {
+    /* padding: 50px; */
+    margin: 10px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.dis {
+    pointer-events: none;
+    opacity: 0.4
+}
