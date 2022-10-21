@@ -34,6 +34,7 @@
       }
     },
     "docktr": {
+      "gettingThirsty": "I'm getting thirsty!",
       "welcome": "Hi! My name is Claire and I have sickle cell disease. Please take care of me!",
       "hydration": "Hydration",
       "pain": "Pain",
@@ -94,6 +95,7 @@
       }
     },
     "docktr": {
+      "gettingThirsty": "¡Tengo sed!",
       "welcome": "¡Hola! Me llamo Claire y tengo la enfermedad de células falciformes. ¡Cuídame por favor!",
       "pain": "Dolor",
       "activeInfection": "Infección activa?",
