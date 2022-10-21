@@ -1,8 +1,9 @@
 /* eslint-disable react/jsx-one-expression-per-line */
 /* eslint-disable react/prop-types */
 import React from 'react';
-import styled from 'styled-components';
-import GirlSvg from './girl1.svg';
+import styled, { css } from 'styled-components';
+import { ReactComponent as GirlSvg } from './girl1.svg';
+import { ReactComponent as SickGirlSvg } from './sickgirl.svg';
 import GlassOfWater from './glass-of-water.svg';
 import Syringe from './syringe.svg';
 import Pills from './pills.svg';
@@ -24,9 +25,34 @@ const StyledStat = styled(Stat)`
   color: ${(p) => (p.alert ? 'red' : 'black')};
   font-weight: ${(p) => (p.alert ? 'bold' : 'normal')};
 `;
-const Girl = styled.img`
-  height: 50vh;
-  width: 50vh;
+const Girl = styled.div`
+align-self:center;
+justify-self: middle;
+animation-timing-function: ease;
+animation-duration: 6s;
+transition-property: all;
+${(props) => {
+    if (props.sick) {
+      return css`
+    #path874 {
+      fill: yellow !important;
+      fill-opacity: .8 !important;
+      transition-delay: 5s;
+      animation-duration: 5s;
+      transition-property: all;
+    }
+    `;
+    } return css`
+    #path874 {
+      fill: white !important;
+      fill-opacity: 1 !important;
+      transition-delay: 5s;
+      animation-duration: 5s;
+      transition-property: all;
+    }
+    `;
+  }}
+  
 `;
 const Buttons = styled.div`
   margin: 0px;
@@ -58,6 +84,8 @@ const Message = styled.div`
   width: 250px;
   padding: 5px;
   align-self: center;
+  min-height:45px;
+  
 `;
 export function getMessage(key, param) {
   switch (key) {
@@ -70,17 +98,19 @@ export function getMessage(key, param) {
     case 'hydration3':
       return 'I love drinking water!';
     case 'hydration4':
-      return 'Aahhh, refreshing!';
+      return 'Aahhh, so refreshing!';
     case 'gaveAntibiotics':
-      return 'Excellent! Daily antibiotic use can prevent infections';
+      return 'Excellent! Daily antibiotic use can help prevent infections';
     case 'medStreak':
       return `${param} ${param === 1 ? 'dose' : 'doses'} in a row`;
     case 'vaccination':
       return "Great job! It's important to stay up-to-date on your shots to prevent infections";
     case 'vaccinationsUpToDate':
-      return "You're up-to-date on your shots!";
+      return "You're up-to-date on your shots. Wonderful!";
     case 'antibioticsWait':
-      return 'You already gave antibiotics today! Wait at least 12 hours';
+      return 'You already gave me antibiotics! Wait at least 12 hours for the next dose';
+    case 'feelingBetter':
+      return 'Thanks, I\'m feeling much better now!';
     default:
       return '';
   }
@@ -113,8 +143,30 @@ const Grid = styled.div`
   width: 100%;
   height: 100%;
 `;
+
+function maybeGetInfected(state) {
+  const vaccinated = state.shots.upToDate;
+  const medicated = state.antibiotics.upToDate;
+  const hydrated = state.hydration > hydrationThreshold;
+
+  const probability = 1 - (vaccinated * 0.9 + medicated * 0.09 + hydrated * 0.009);
+  const random = Math.random();
+  const infected = random < probability;
+  // console.log({ probability, random, infected });
+  return infected;
+}
+
+function messageReducer(state, newActiveInfection) {
+  if (state.activeInfection && !newActiveInfection) {
+    return { text: getMessage('feelingBetter'), posted: Date.now() };
+  }
+  if (Date.now() - state.message.posted > 5000) {
+    return { text: '', posted: null };
+  }
+  return { ...state.message };
+}
+
 export function statReducer(state, action) {
-  console.log('called');
   switch (action.type) {
     case 'GIVE_WATER':
       return {
@@ -151,6 +203,8 @@ export function statReducer(state, action) {
       const halfDay = oneDay / 2;
       const timeSinceLastGivenAntibiotics = state.currentTime - state.antibiotics.lastGiven;
       const timeSinceLastGivenShots = state.currentTime - state.shots.lastGiven;
+      const newActiveInfection = state.activeInfection ? !(state.hydration === 100 && state.shots.upToDate && state.antibiotics.upToDate)
+        : maybeGetInfected(state);
       return {
         ...state,
         currentTime: state.currentTime + action.value,
@@ -171,21 +225,21 @@ export function statReducer(state, action) {
               : (Math.floor(100 * ((state.currentTime - newLastHadPain)
                 / (1000 * 60 * 60 * 24))) / 100),
         },
-        activeInfection: (state.shots.upToDate && state.antibiotics.upToDate) ? false : state.hydration < hydrationThreshold,
-        message: Date.now() - state.message.posted > 5000 ? { text: '', posted: null } : { ...state.message },
+        activeInfection: newActiveInfection,
+        message: messageReducer(state, newActiveInfection),
       };
     }
     default:
       throw new Error();
   }
 }
+
 export default function Game1() {
   const { petGameState: state, setPetGamePollFunction, dispatchPetGameState: dispatch } = React.useContext(AppContext);
 
   React.useEffect(() => {
     setPetGamePollFunction(() => (gameState) => {
       try {
-        console.log('here', gameState);
         dispatch({ type: 'ADVANCE_TIME', value: millisecondsPerSecond });
         if (gameState.hydration === 50) {
           return 'getting thirsty';
@@ -250,7 +304,22 @@ export default function Game1() {
         />
       </Buttons>
       <Message>{state.message.text}</Message>
-      <Girl src={GirlSvg} />
+
+      <Girl
+        sick={state.activeInfection}
+
+      >{(state.activeInfection ? (
+        <SickGirlSvg
+          height={300}
+          width={150}
+        />
+      ) : (
+        <GirlSvg
+          height={300}
+          width={250}
+        />
+      ))}
+      </Girl>
     </Grid>
   );
 }
