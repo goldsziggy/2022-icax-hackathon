@@ -252,14 +252,14 @@ export default function Game1() {
       try {
         dispatch({ type: 'ADVANCE_TIME', value: millisecondsPerSecond });
         if (gameState.hydration === 50) {
-          return 'getting thirsty';
+          return languageData[language].docktr.gettingThirsty;
         }
       } catch (e) {
         console.log(e);
       }
       return null;
     });
-  }, [dispatch, setPetGamePollFunction]);
+  }, [dispatch, setPetGamePollFunction, language]);
 
   return (
     <Grid>
