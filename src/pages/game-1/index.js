@@ -93,7 +93,7 @@ export const defaultPetGameState = {
   antibiotics: { upToDate: false, lastGiven: null, streak: 0 },
   shots: { upToDate: false, lastGiven: null },
   currentTime: Date.now(),
-  message: getMessage('welcome'),
+  message: { text: getMessage('welcome'), posted: Date.now() },
   activeInfection: false,
 
 };
@@ -120,25 +120,25 @@ export function statReducer(state, action) {
       return {
         ...state,
         hydration: Math.min(100, state.hydration + action.value),
-        message: getMessage(`hydration${state.hydration % 4 + 1}`),
+        message: { text: getMessage(`hydration${(state.hydration % 4) + 1}`), posted: Date.now() },
       };
     case 'GIVE_SHOT':
       return {
         ...state,
         shots: { upToDate: true, lastGiven: state.currentTime },
         message:
-          getMessage(state.shots.upToDate ? 'vaccinationsUpToDate' : 'vaccination'),
+          { text: getMessage(state.shots.upToDate ? 'vaccinationsUpToDate' : 'vaccination'), posted: Date.now() },
       };
     case 'GIVE_ANTIBIOTICS':
     {
       if (!state.antibiotics.upToDate) {
         return {
           ...state,
-          message: getMessage('gaveAntibiotics'),
+          message: { text: getMessage('gaveAntibiotics'), posted: Date.now() },
           antibiotics: { upToDate: true, lastGiven: state.currentTime, streak: state.antibiotics.streak + 1 },
         };
       }
-      return { ...state, message: getMessage('antibioticsWait') };
+      return { ...state, message: { text: getMessage('antibioticsWait'), posted: Date.now() } };
     }
     case 'ADVANCE_TIME': {
       const newPainLevel = state.hydration > hydrationThreshold
@@ -172,6 +172,7 @@ export function statReducer(state, action) {
                 / (1000 * 60 * 60 * 24))) / 100),
         },
         activeInfection: (state.shots.upToDate && state.antibiotics.upToDate) ? false : state.hydration < hydrationThreshold,
+        message: Date.now() - state.message.posted > 5000 ? { text: '', posted: null } : { ...state.message },
       };
     }
     default:
@@ -192,6 +193,7 @@ export default function Game1() {
       } catch (e) {
         console.log(e);
       }
+      return null;
     });
   }, [dispatch, setPetGamePollFunction]);
 
@@ -212,7 +214,11 @@ export default function Game1() {
           name="Days without pain"
           value={state.pain.daysWithoutPain}
         />
-        <StyledStat name="Med streak" value={getMessage('medStreak', state.antibiotics.streak)} alert={state.antibiotics.streak === 0} />
+        <StyledStat
+          name="Med streak"
+          value={getMessage('medStreak', state.antibiotics.streak)}
+          alert={state.antibiotics.streak === 0}
+        />
         <StyledStat
           name="Current Date"
           value={`${new Date(state.currentTime).toLocaleDateString()}
@@ -243,7 +249,7 @@ export default function Game1() {
           }}
         />
       </Buttons>
-      <Message>{state.message}</Message>
+      <Message>{state.message.text}</Message>
       <Girl src={GirlSvg} />
     </Grid>
   );
