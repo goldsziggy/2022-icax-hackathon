@@ -106,7 +106,7 @@ export default function Layout() {
           >
             <CustomList unstyled>
               <ListItem mt="1rem">
-                <Link to="/1" onClick={() => { setIsMenuVisibile(false); }}>Game 1</Link>
+                <Link to="/1" onClick={() => { setIsMenuVisibile(false); }}>Doctr</Link>
               </ListItem>
               <ListItem mt="1rem">
                 <Link to="/2" onClick={() => { setIsMenuVisibile(false); }}>Quizr</Link>
@@ -115,10 +115,10 @@ export default function Layout() {
                 <Link to="/3" onClick={() => { setIsMenuVisibile(false); }}>Flippr</Link>
               </ListItem>
               <ListItem mt="1rem">
-                <Link to="/4" onClick={() => { setIsMenuVisibile(false); }}>Water Clicker</Link>
+                <Link to="/4" onClick={() => { setIsMenuVisibile(false); }}>Water Clickr</Link>
               </ListItem>
               <ListItem mt="1rem">
-                <Link to="/5" onClick={() => { setIsMenuVisibile(false); }}>Wordler</Link>
+                <Link to="/5" onClick={() => { setIsMenuVisibile(false); }}>Wordlr</Link>
               </ListItem>
             </CustomList>
           </BoxAside>
