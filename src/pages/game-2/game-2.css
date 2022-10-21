@@ -1,0 +1,56 @@
+.App {
+    text-align: center;
+    background-image: linear-gradient(to left, #F39F86,#F9D976);
+}
+
+.blood-cell-container {
+    height: 200px;
+    width: 200px;
+}
+
+.question-card {
+    background-color: #e16db2;
+    margin: 0 auto;
+    padding: 16px;
+    border-radius: 16px;
+    color: black;
+    width: 80%;
+    height: auto;
+}
+
+ul {
+    list-style: none;
+    margin-block-start: 0;
+    padding-inline-start: 0;
+}
+
+li {
+    background-color: #90e6d2;
+    padding: 16px;
+    border: 3px solid white;
+    border-radius: 20px;
+    font-size: 20px;
+    margin-top: 8px;
+}
+
+.final-results {
+    background-color: #e9db71;
+    margin: 0 auto;
+    padding: 16px;
+    border-radius: 16px;
+    color: #F8F8FF;
+    width: 50%;
+    height: auto;
+}
+
+button {
+    background-color: #8755D9;
+    border: none;
+    color: white;
+    padding: 16px 24px;
+    text-align: center;
+    display: inline-block;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 24px;
+}

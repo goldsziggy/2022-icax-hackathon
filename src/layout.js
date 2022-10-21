@@ -28,6 +28,10 @@ const CustomList = styled(List)`
 a {
   color: #F8F8FF
 }
+li {
+  padding: 8px;
+  border: none;
+}
 `;
 
 BaseBox.defaultProps = {
@@ -55,7 +59,7 @@ const leftArea = (isMenuVisibile, setIsMenuVisibile) => (
       color="white"
       mb="0"
     >
-      Sickle Cell App
+      S.C.K.L.R
     </Header.h5>
   </Flex>
 );
@@ -106,19 +110,19 @@ export default function Layout() {
           >
             <CustomList unstyled>
               <ListItem mt="1rem">
-                <Link to="/1">Game 1</Link>
+                <Link to="/1" onClick={() => { setIsMenuVisibile(false); }}>Doctr</Link>
               </ListItem>
               <ListItem mt="1rem">
-                <Link to="/2">Game 2</Link>
+                <Link to="/2" onClick={() => { setIsMenuVisibile(false); }}>Quizr</Link>
               </ListItem>
               <ListItem mt="1rem">
-                <Link to="/3">Card Match</Link>
+                <Link to="/3" onClick={() => { setIsMenuVisibile(false); }}>Flippr</Link>
               </ListItem>
               <ListItem mt="1rem">
-                <Link to="/4">Water Clicker</Link>
+                <Link to="/4" onClick={() => { setIsMenuVisibile(false); }}>Clickr</Link>
               </ListItem>
               <ListItem mt="1rem">
-                <Link to="/5">Wordle</Link>
+                <Link to="/5" onClick={() => { setIsMenuVisibile(false); }}>Wordlr</Link>
               </ListItem>
             </CustomList>
           </BoxAside>

@@ -17,7 +17,18 @@
         "stats": "Stats"
       }
     },
-    "waterDrinker": {},
+    "waterDrinker": {
+      "ui": {
+        "title": "Water Drinker!",
+        "subtitle": "Taking inspiration from the cookie clicker game!",
+        "click": "Click Me!",
+        "out": "Out of clicks!",
+        "desc": "Try to get your personal high score of drinking the most water!  I heard there is a random secret that sometimes happens....",
+        "timer": "You are currently out of clicks! Time to refresh in:",
+        "counter": "Your Current Drink Counter is:",
+        "notification": "Water Clicker has refreshed!"
+      }
+    },
     "game1": {},
     "game2": {},
     "game3": {}
@@ -39,10 +50,21 @@
         "button": "Enviar",
         "stats": "Estadísticas"
       }
-    }
-  },
-  "waterDrinker": {},
-  "game1": {},
-  "game2": {},
-  "game3": {}
+    },
+    "waterDrinker": {
+      "ui": {
+        "title": "¡Bebedor de agua!",
+        "subtitle": "¡Inspirándose en el juego de clicker de galletas!",
+        "click": "¡Haz click en mi!",
+        "out": "¡Fuera de los clics!",
+        "desc": "¡Intenta obtener tu puntaje personal de beber la mayor cantidad de agua! Escuché que hay un secreto aleatorio que a veces sucede....",
+        "timer": "¡Actualmente no tiene clics! Hora de refrescarse en:",
+        "counter": "Su contador de bebidas actual es:",
+        "notification": "Water Clicker se ha actualizado!"
+      }
+    },
+    "game1": {},
+    "game2": {},
+    "game3": {}
+  }
 }
