@@ -28,6 +28,9 @@ const CustomList = styled(List)`
 a {
   color: #F8F8FF
 }
+li {
+  padding: 8px;
+}
 `;
 
 BaseBox.defaultProps = {
