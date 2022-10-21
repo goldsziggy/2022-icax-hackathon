@@ -55,7 +55,7 @@ const leftArea = (isMenuVisibile, setIsMenuVisibile) => (
       color="white"
       mb="0"
     >
-      Sickle Cell App
+      S.C.K.L.R
     </Header.h5>
   </Flex>
 );
