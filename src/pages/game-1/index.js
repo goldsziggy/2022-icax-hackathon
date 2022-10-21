@@ -8,6 +8,7 @@ import GlassOfWater from './glass-of-water.svg';
 import Syringe from './syringe.svg';
 import Pills from './pills.svg';
 import AppContext from '../../app-context';
+import languageData from '../../assets/localization.json';
 
 export const hydrationThreshold = 30;
 export const millisecondsPerSecond = 600 * 1000; // default to one minute/sec
@@ -107,36 +108,7 @@ const Message = styled.div`
   min-height:45px;
   
 `;
-export function getMessage(key, param) {
-  switch (key) {
-    case 'welcome':
-      return 'Hi! My name is _____ and I have sickle cell disease. Please take care of me!';
-    case 'hydration1':
-      return 'Keep it up! Drinking lots of water is key';
-    case 'hydration2':
-      return 'Water is life!';
-    case 'hydration3':
-      return 'I love drinking water!';
-    case 'hydration4':
-      return 'Aahhh, so refreshing!';
-    case 'gaveAntibiotics':
-      return 'Excellent! Daily antibiotic use can help prevent infections';
-    case 'medStreak':
-      return `${param} ${param === 1 ? 'dose' : 'doses'} in a row`;
-    case 'vaccination':
-      return "Great job! It's important to stay up-to-date on your shots to prevent infections";
-    case 'vaccinationsUpToDate':
-      return "You're up-to-date on your shots. Wonderful!";
-    case 'antibioticsWait':
-      return 'You already gave me antibiotics! Wait at least 12 hours for the next dose';
-    case 'notFeelingGood':
-      return 'I\'m not feeling so good...';
-    case 'feelingBetter':
-      return 'Thanks, I\'m feeling much better now!';
-    default:
-      return '';
-  }
-}
+
 export const defaultPetGameState = {
   hydration: 100,
   pain: { level: 0, lastHadPain: Date.now(), daysWithoutPain: 0 },
@@ -145,7 +117,7 @@ export const defaultPetGameState = {
   antibiotics: { upToDate: false, lastGiven: null, streak: 0 },
   shots: { upToDate: false, lastGiven: null },
   currentTime: Date.now(),
-  message: { text: getMessage('welcome'), posted: Date.now() },
+  message: { text: 'welcome', posted: Date.now() },
   activeInfection: false,
 
 };
@@ -191,45 +163,43 @@ function maybeGetInfected(state) {
   // console.log({ probability, random, infected });
   return infected;
 }
-
-function messageReducer(state, newActiveInfection) {
+export function messageReducer(state, newActiveInfection) {
   if (state.activeInfection && !newActiveInfection) {
-    return { text: getMessage('feelingBetter'), posted: Date.now() };
+    return { text: 'feelingBetter', posted: Date.now() };
   }
   if (!state.activeInfection && newActiveInfection) {
-    return { text: getMessage('notFeelingGood'), posted: Date.now() };
+    return { text: 'notFeelingGood', posted: Date.now() };
   }
   if (Date.now() - state.message.posted > 5000) {
     return { text: '', posted: null };
   }
   return { ...state.message };
 }
-
 export function statReducer(state, action) {
   switch (action.type) {
     case 'GIVE_WATER':
       return {
         ...state,
         hydration: Math.min(100, state.hydration + action.value),
-        message: { text: getMessage(`hydration${(state.hydration % 4) + 1}`), posted: Date.now() },
+        message: { text: `hydration${(state.hydration % 4) + 1}`, posted: Date.now() },
       };
     case 'GIVE_SHOT':
       return {
         ...state,
         shots: { upToDate: true, lastGiven: state.currentTime },
         message:
-          { text: getMessage(state.shots.upToDate ? 'vaccinationsUpToDate' : 'vaccination'), posted: Date.now() },
+          { text: state.shots.upToDate ? 'vaccinationsUpToDate' : 'vaccination', posted: Date.now() },
       };
     case 'GIVE_ANTIBIOTICS':
     {
       if (!state.antibiotics.upToDate) {
         return {
           ...state,
-          message: { text: getMessage('gaveAntibiotics'), posted: Date.now() },
+          message: { text: 'gaveAntibiotics', posted: Date.now() },
           antibiotics: { upToDate: true, lastGiven: state.currentTime, streak: state.antibiotics.streak + 1 },
         };
       }
-      return { ...state, message: { text: getMessage('antibioticsWait'), posted: Date.now() } };
+      return { ...state, message: { text: 'antibioticsWait', posted: Date.now() } };
     }
     case 'ADVANCE_TIME': {
       const newPainLevel = state.hydration > hydrationThreshold
@@ -272,9 +242,10 @@ export function statReducer(state, action) {
       throw new Error();
   }
 }
-
 export default function Game1() {
-  const { petGameState: state, setPetGamePollFunction, dispatchPetGameState: dispatch } = React.useContext(AppContext);
+  const {
+    petGameState: state, setPetGamePollFunction, dispatchPetGameState: dispatch, language,
+  } = React.useContext(AppContext);
 
   React.useEffect(() => {
     setPetGamePollFunction(() => (gameState) => {
@@ -294,25 +265,31 @@ export default function Game1() {
     <Grid>
       <StatsBox>
         <StyledStat
-          name="Hydration"
+          name={languageData[language].docktr.hydration}
           value={`${state.hydration}%`}
           alert={
             state.hydration !== null && state.hydration < hydrationThreshold
           }
         />
-        <StyledStat name="Pain" value={`${state.pain.level}/10`} />
-        <StyledStat name="Active Infection?" value={`${state.activeInfection ? 'yes' : 'no'}`} alert={state.activeInfection} />
+        <StyledStat name={languageData[language].docktr.pain} value={`${state.pain.level}/10`} />
         <StyledStat
-          name="Days without pain"
+          name={languageData[language].docktr.activeInfection}
+          value={`${state.activeInfection ? languageData[language].docktr.yes : languageData[language].docktr.no}`}
+          alert={state.activeInfection}
+        />
+        <StyledStat
+          name={languageData[language].docktr.daysWithoutPain}
           value={state.pain.daysWithoutPain}
         />
         <StyledStat
-          name="Med streak"
-          value={getMessage('medStreak', state.antibiotics.streak)}
+          name={languageData[language].docktr.medStreakLabel}
+          value={`${state.antibiotics.streak} ${(state.antibiotics.streak === 1
+            ? languageData[language].docktr.medStreakOne
+            : languageData[language].docktr.medStreak)}`}
           alert={state.antibiotics.streak === 0}
         />
         <StyledStat
-          name="Current Date"
+          name={languageData[language].docktr.currentDate}
           value={`${new Date(state.currentTime).toLocaleDateString()}
           
           ${new Date(state.currentTime).toLocaleTimeString()}`}
@@ -341,7 +318,7 @@ export default function Game1() {
           }}
         />
       </Buttons>
-      <Message>{state.message.text}</Message>
+      <Message>{languageData[language].docktr[state.message.text]}</Message>
 
       <Girl
         sick={state.activeInfection}
