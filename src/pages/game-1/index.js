@@ -265,25 +265,31 @@ export default function Game1() {
     <Grid>
       <StatsBox>
         <StyledStat
-          name="Hydration"
+          name={languageData[language].docktr.hydration}
           value={`${state.hydration}%`}
           alert={
             state.hydration !== null && state.hydration < hydrationThreshold
           }
         />
-        <StyledStat name="Pain" value={`${state.pain.level}/10`} />
-        <StyledStat name="Active Infection?" value={`${state.activeInfection ? 'yes' : 'no'}`} alert={state.activeInfection} />
+        <StyledStat name={languageData[language].docktr.pain} value={`${state.pain.level}/10`} />
         <StyledStat
-          name="Days without pain"
+          name={languageData[language].docktr.activeInfection}
+          value={`${state.activeInfection ? languageData[language].docktr.yes : languageData[language].docktr.no}`}
+          alert={state.activeInfection}
+        />
+        <StyledStat
+          name={languageData[language].docktr.daysWithoutPain}
           value={state.pain.daysWithoutPain}
         />
         <StyledStat
-          name="Med streak"
-          value={`${state.antibiotics.streak} ${(state.antibiotics.streak === 1 ? 'medStreakOne' : 'medStreak')}`}
+          name={languageData[language].docktr.medStreakLabel}
+          value={`${state.antibiotics.streak} ${(state.antibiotics.streak === 1
+            ? languageData[language].docktr.medStreakOne
+            : languageData[language].docktr.medStreak)}`}
           alert={state.antibiotics.streak === 0}
         />
         <StyledStat
-          name="Current Date"
+          name={languageData[language].docktr.currentDate}
           value={`${new Date(state.currentTime).toLocaleDateString()}
           
           ${new Date(state.currentTime).toLocaleTimeString()}`}
