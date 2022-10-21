@@ -18,6 +18,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 import AppContext from './app-context';
 
+const CustomSelect = styled(SelectField)`
+padding-bottom: .25rem;
+padding-top: .5rem;
+`;
 const ToolbarButton = styled(Button)``;
 const BaseBox = styled(Box)``;
 const CustomList = styled(List)`
@@ -64,7 +68,7 @@ const langOptions = [
 const rightArea = (language, setLanguage) => (
   <Flex alignItems="center" ml={-3}>
 
-    <SelectField
+    <CustomSelect
       onChange={(e) => { console.log(e); setLanguage(e.value); }}
       options={langOptions}
       value={langOptions.filter((l) => l.value === language)}
