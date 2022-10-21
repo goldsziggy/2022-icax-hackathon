@@ -1,0 +1,26 @@
+<svg viewBox="0 0 175 175" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <defs>
+    <linearGradient id="linearGradient4558" gradientUnits="userSpaceOnUse" gradientTransform="matrix(0.341475, 0, -0.017433, 0.324105, 8.630695, -106.337635)" x1="170.1416" y1="659.45453" x2="423.67471" y2="387.28696" xlink:href="#linearGradient3773-62"></linearGradient>
+    <linearGradient id="linearGradient3773-62">
+      <stop id="stop3895-5" offset="0" style="stop-color:#702424;stop-opacity:1;"></stop>
+      <stop style="stop-color:#b11f1f;stop-opacity:1;" offset="0.1988" id="stop3897-4"></stop>
+      <stop style="stop-color:#c05858;stop-opacity:1;" offset="1" id="stop3777-6"></stop>
+    </linearGradient>
+    <filter color-interpolation-filters="sRGB" id="filter3909-3-1-0-7" x="-0.30411777" width="1.6082355" y="-0.50821674" height="2.0164335">
+      <feGaussianBlur stdDeviation="13.0003" id="feGaussianBlur3911-8-1-6-0"></feGaussianBlur>
+    </filter>
+  </defs>
+  <path id="path2985-8" d="M 159.183 86.783 C 159.549 109.366 125.719 113.44 89.254 113.44 C 52.788 113.44 23.749 95.09 25.431 72.464 C 27.665 42.387 59.956 46.296 78.303 47.526 C 106.314 49.405 158.61 51.552 159.183 86.783 Z" style="fill: url(#linearGradient4558); fill-opacity: 1; stroke-width: 1.3; stroke-linecap: butt; stroke-linejoin: round; stroke-miterlimit: 4; stroke-opacity: 1; stroke-dashoffset: 0; stroke: rgb(36, 30, 30);" transform="matrix(0.956693, 0.291099, -0.291099, 0.956693, 27.299374, -23.39393)"></path>
+  <path id="path3837-7-1-9-6-6" d="M 104.065 79.581 C 78.419 84.29 73.076 76.185 56.889 63.374 C 48.006 56.342 92.984 56.982 118.573 64.356 C 148.207 147.459 121.739 73.644 104.065 79.581 Z" style="opacity: 0.408333; fill: rgb(0, 0, 0); fill-opacity: 1; stroke: none; filter: url(#filter3909-3-1-0-7);" transform="matrix(0.956693, 0.291099, -0.291099, 0.956693, 24.313831, -24.051553)"></path>
+  <text style="white-space: pre; fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 10.8px;" x="42.309" y="99.418"> </text>
+  <text style="white-space: pre; fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 10.8px;" x="69.043" y="105.605"> </text>
+  <text style="white-space: pre; fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 10.8px;" x="50.928" y="92.312"> </text>
+  <text style="white-space: pre; fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 10.8px;" x="192.225" y="208.173"> </text>
+  <text style="white-space: pre; fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 10.8px;" x="163.826" y="87.001"> </text>
+  <text style="white-space: pre; fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 10.8px;" x="134.64" y="96.186"> </text>
+  <path style="fill: rgb(216, 216, 216); stroke: rgb(0, 0, 0);" d="M 70.817 82.625 C 72.552 91.529 77.432 97.847 86.059 103.137 C 89.718 105.382 96.19 106.671 98.745 103.398 C 102.7 98.332 101.195 93.628 101.176 87.359" transform="matrix(0.981526, 0.191329, -0.191329, 0.981526, 19.576468, -14.745407)"></path>
+  <ellipse style="fill: rgb(216, 216, 216); stroke: rgb(0, 0, 0);" cx="79.807" cy="59.3" rx="5.375" ry="8.425"></ellipse>
+  <ellipse style="fill: rgb(216, 216, 216); stroke: rgb(0, 0, 0);" cx="110.022" cy="70.203" rx="5.171" ry="8.403"></ellipse>
+  <path style="stroke: rgb(0, 0, 0); fill: rgb(20, 29, 25);" d="M 115.304 66.684 C 110.863 67.295 109.875 70.339 110.746 72.744 C 111.167 73.905 111.641 74.953 112.513 76.009 C 112.911 76.492 113.616 76.639 114.159 76.932"></path>
+  <path style="stroke: rgb(0, 0, 0); fill: rgb(13, 21, 18);" d="M 84.38 55.23 C 82.557 55.23 81.856 56.059 81.046 56.823 C 79.337 58.436 79.083 60.964 80.037 62.753 C 80.537 63.69 81.28 64.38 82.492 65.084 C 82.628 65.161 84.679 62.843 84.685 62.631" transform="matrix(1, 0, 0, 1, 0.19327780547326512, 0)"></path>
+</svg>

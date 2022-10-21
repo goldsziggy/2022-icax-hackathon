@@ -1,30 +1,5 @@
 [
     {
-        "question": "Why is Sickle Cell Disease (SCD) so damaging to those with the condition?",
-        "choices": [
-           {
-              "id": 0,
-              "text": "The sickle-shaped cells are too sharp for arteries and veins",
-              "isCorrect": false
-           },
-           {
-              "id": 1,
-              "text": "It inhibits the ability of hemoglobin in red blood cells to carry oxygen",
-              "isCorrect": true
-           },
-           {
-              "id": 2,
-              "text": "There is no way to mitigate the pain or complications",
-              "isCorrect": false
-           },
-           {
-              "id": 3,
-              "text": "Individuals can pass on the disease through hugging or touching their friends and family",
-              "isCorrect": false
-           }
-        ]
-     },
-    {
        "question": "What is a flare-up of pain called in someone with SCD?",
        "choices": [
           {
@@ -74,6 +49,31 @@
           }
        ]
     },
+    {
+        "question": "Why is Sickle Cell Disease (SCD) so damaging to those with the condition?",
+        "choices": [
+           {
+              "id": 0,
+              "text": "The sickle-shaped cells are too sharp for arteries and veins",
+              "isCorrect": false
+           },
+           {
+              "id": 1,
+              "text": "It inhibits the ability of hemoglobin in red blood cells to carry oxygen",
+              "isCorrect": true
+           },
+           {
+              "id": 2,
+              "text": "There is no way to mitigate the pain or complications",
+              "isCorrect": false
+           },
+           {
+              "id": 3,
+              "text": "Individuals can pass on the disease through hugging or touching their friends and family",
+              "isCorrect": false
+           }
+        ]
+     },
     {
        "question": "What are some warning signs for someone with SCD to see a medical professional immediately?",
        "choices": [
@@ -210,12 +210,12 @@
           {
              "id": 1,
              "text": "Staying hydrated, up-to-date on vaccinations, and taking pain medication",
-             "isCorrect": false
+             "isCorrect": true
           },
           {
              "id": 2,
              "text": "Eating spicy and sugary foods to boost immunity",
-             "isCorrect": true
+             "isCorrect": false
           },
           {
              "id": 3,

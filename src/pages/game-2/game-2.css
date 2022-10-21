@@ -1,10 +1,15 @@
 .App {
     text-align: center;
-    background-image: url("./blood-drop.jpg");
+    background-image: linear-gradient(to left, #F39F86,#F9D976);
+}
+
+.blood-cell-container {
+    height: 200px;
+    width: 200px;
 }
 
 .question-card {
-    background-color: #DB5AA8;
+    background-color: #e16db2;
     margin: 0 auto;
     padding: 16px;
     border-radius: 16px;
@@ -15,10 +20,12 @@
 
 ul {
     list-style: none;
+    margin-block-start: 0;
+    padding-inline-start: 0;
 }
 
 li {
-    background-color: #65EFCF;
+    background-color: #90e6d2;
     padding: 16px;
     border: 3px solid white;
     border-radius: 20px;
@@ -27,7 +34,7 @@ li {
 }
 
 .final-results {
-    background-color: #F9E557;
+    background-color: #e9db71;
     margin: 0 auto;
     padding: 16px;
     border-radius: 16px;
@@ -36,8 +43,8 @@ li {
     height: auto;
 }
 
-.button {
-    background-color: red;
+button {
+    background-color: #8755D9;
     border: none;
     color: white;
     padding: 16px 24px;
