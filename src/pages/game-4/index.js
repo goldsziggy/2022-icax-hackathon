@@ -6,6 +6,7 @@ import styled, { css } from 'styled-components';
 import useAudio from '../../hooks/use-audio';
 import AppContext from '../../app-context';
 import { ReactComponent as WaterGlass } from '../../assets/waterglass.svg';
+import localization from '../../assets/localization.json';
 
 const handleClick = ({
   numberOfClicks, setNumberOfClicks, toggleSound,
@@ -60,7 +61,7 @@ ${(props) => {
   }}
 `;
 
-const pollFunction = () => (gameState, setGameState) => {
+const pollFunction = () => (gameState, setGameState, language) => {
   try {
     const remainingTime = 30 - (Date.now() - gameState.timeLastClicked) / 1000;
     setGameState({ ...gameState, timeTillRefresh: parseInt(remainingTime, 10) });
@@ -75,7 +76,7 @@ const pollFunction = () => (gameState, setGameState) => {
     if (remainingTime <= 0) {
       setGameState({ ...gameState, timeLastClicked: Date.now(), currentFillState: 3 });
 
-      return 'Water Clicker has refreshed!';
+      return localization[language].waterDrinker.ui.notification;
     }
     return '';
   } catch (e) {
@@ -85,7 +86,9 @@ const pollFunction = () => (gameState, setGameState) => {
 };
 
 export default function WaterClicker() {
-  const { setWaterClickerState, waterClickerState, setWaterClickerPollFunction } = useContext(AppContext);
+  const {
+    setWaterClickerState, waterClickerState, setWaterClickerPollFunction, language,
+  } = useContext(AppContext);
 
   const [numberOfClicks, setNumberOfClicks] = useState(waterClickerState.numberOfClicks || 0);
   const [currentFillState, setCurrentFillState] = useState(waterClickerState.currentFillState || 3);
@@ -111,8 +114,8 @@ export default function WaterClicker() {
     <Flex alignSelf="center" maxWidth="500px" maxHeight="800px">
       <Box>
         <CustomCard
-          cardSubtitle="Taking inspiration from the cookie clicker game!"
-          cardTitle="Water Drinker!"
+          cardSubtitle={localization[language].waterDrinker.ui.title}
+          cardTitle={localization[language].waterDrinker.ui.subtitle}
           playing={playing}
         >
           <WaterGlassContainer currentFillState={currentFillState}>
@@ -129,18 +132,18 @@ export default function WaterClicker() {
           </WaterGlassContainer>
 
           <Header.h5>
-            {currentFillState === 0 ? 'Out of clicks!' : 'Click Me!'}
+            {currentFillState === 0 ? localization[language].waterDrinker.ui.out : localization[language].waterDrinker.ui.click}
           </Header.h5>
           <Header.h6>
-            Your Current Drink Counter is
+            {localization[language].waterDrinker.ui.counter}
             {' '}
             {numberOfClicks}
             !
           </Header.h6>
           <Card.Body>
             {currentFillState === 0
-              ? `You are currently out of clicks! Please check back in ${timeTillRefresh} seconds when you earn another drink.`
-              : 'Try to get your personal high score of drinking the most water!  I heard there is a random secret that sometimes happens....'}
+              ? `${localization[language].waterDrinker.ui.timer} ${timeTillRefresh}`
+              : localization[language].waterDrinker.ui.desc}
           </Card.Body>
         </CustomCard>
       </Box>
