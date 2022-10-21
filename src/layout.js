@@ -109,16 +109,16 @@ export default function Layout() {
                 <Link to="/1" onClick={() => { setIsMenuVisibile(false); }}>Game 1</Link>
               </ListItem>
               <ListItem mt="1rem">
-                <Link to="/2" onClick={() => { setIsMenuVisibile(false); }}>Game 2</Link>
+                <Link to="/2" onClick={() => { setIsMenuVisibile(false); }}>Quizr</Link>
               </ListItem>
               <ListItem mt="1rem">
-                <Link to="/3" onClick={() => { setIsMenuVisibile(false); }}>Game 3</Link>
+                <Link to="/3" onClick={() => { setIsMenuVisibile(false); }}>Flippr</Link>
               </ListItem>
               <ListItem mt="1rem">
                 <Link to="/4" onClick={() => { setIsMenuVisibile(false); }}>Water Clicker</Link>
               </ListItem>
               <ListItem mt="1rem">
-                <Link to="/5" onClick={() => { setIsMenuVisibile(false); }}>Wordle</Link>
+                <Link to="/5" onClick={() => { setIsMenuVisibile(false); }}>Wordler</Link>
               </ListItem>
             </CustomList>
           </BoxAside>
