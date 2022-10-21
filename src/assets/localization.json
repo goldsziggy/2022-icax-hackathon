@@ -1,0 +1,48 @@
+{
+  "eng": {
+    "wordle": {
+      "wordlist": ["sickle", "cell", "jaundice"],
+      "errors": {
+        "maxLengthErr": "Please specify all characters in the word",
+        "wordErr": "It's ok, try again!",
+        "title": "Uh oh! Something's wrong."
+      },
+      "stats": {
+        "attemptCounter": "Total Attempt Counter: ",
+        "numberCompleted": "Number of Completed Words: ",
+        "completedWords": "Completed Word List: "
+      },
+      "ui": {
+        "button": "Submit",
+        "stats": "Stats"
+      }
+    },
+    "waterDrinker": {},
+    "game1": {},
+    "game2": {},
+    "game3": {}
+  },
+  "esp": {
+    "wordle": {
+      "wordlist": ["hoz", "célula", "ictericia"],
+      "errors": {
+        "maxLengthErr": "Por favor, especifique todos los caracteres de la palabra",
+        "wordErr": "¡Está bien, inténtalo de nuevo!",
+        "title": "¡UH oh! Algo esta mal."
+      },
+      "stats": {
+        "attemptCounter": "Contador de intentos totales: ",
+        "numberCompleted": "Número de palabras completadas: ",
+        "completedWords": "Lista de palabras completa: "
+      },
+      "ui": {
+        "button": "Enviar",
+        "stats": "Estadísticas"
+      }
+    }
+  },
+  "waterDrinker": {},
+  "game1": {},
+  "game2": {},
+  "game3": {}
+}

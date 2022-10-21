@@ -13,6 +13,8 @@ const defaultState = {
   dispatchPetGameState: () => {},
   petGamePollFunction: () => {},
   setPetGamePollFunction: () => {},
+  setLanguage: () => {},
+  language: 'eng',
   waterClickerState: {},
   setWaterClickerState: () => {},
   waterClickerPollFunction: () => {},

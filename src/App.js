@@ -8,23 +8,12 @@ import {
 import AppContext from './app-context';
 import Layout from './layout';
 
-import Game1, { getMessage, statReducer } from './pages/game-1';
+import Game1, { statReducer, defaultPetGameState } from './pages/game-1';
 import Game2 from './pages/game-2';
 import Game3 from './pages/game-3';
 import Game4 from './pages/game-4';
+import Game5 from './pages/game-5';
 
-export const defaultPetGameState = {
-  hydration: 100,
-  pain: { level: 0, lastHadPain: Date.now(), daysWithoutPain: 0 },
-  temperature: 68,
-  daysWithoutPain: 0,
-  antibiotics: { upToDate: false, lastGiven: null, streak: 0 },
-  shots: { upToDate: false, lastGiven: null },
-  currentTime: Date.now(),
-  message: getMessage('welcome'),
-  activeInfection: false,
-
-};
 function getInitialStateFromLocalStorage(itemName, defaultState) {
   const item = localStorage.getItem(itemName);
   return item ? JSON.parse(item) : defaultState;
@@ -37,7 +26,10 @@ export default function App() {
   const [waterClickerState, setWaterClickerState] = useState(getInitialStateFromLocalStorage('waterClickerGameState', {}));
   const [petGamePollFunction, setPetGamePollFunction] = useState(() => {});
   const [waterClickerPollFunction, setWaterClickerPollFunction] = useState(() => {});
+  const [wordlePollFunction, setWordlePollFunction] = useState(() => {});
   const [petGameState, dispatchPetGameState] = React.useReducer(statReducer, getInitialStateFromLocalStorage('petGameState', defaultPetGameState));
+  const [wordleGameState, setWordleGameState] = useState(getInitialStateFromLocalStorage('wordleGameState', {}));
+  const [language, setLanguage] = useState(getInitialStateFromLocalStorage('language', 'eng'));
   const sharedState = useMemo(() => ({
     notifications,
     matchingGameState,
@@ -47,13 +39,20 @@ export default function App() {
     petGamePollFunction,
     waterClickerState,
     waterClickerPollFunction,
+    wordleGameState,
+    setWordleGameState,
     setWaterClickerState,
     setNotifications,
     setMatchingGameState,
     setQuizGameState,
     setPetGamePollFunction,
     setWaterClickerPollFunction,
-  }), [notifications, matchingGameState, quizGameState, petGameState, petGamePollFunction, waterClickerState, waterClickerPollFunction]);
+    wordlePollFunction,
+    language,
+    setLanguage,
+    setWordlePollFunction,
+  }), [wordleGameState, notifications, matchingGameState, quizGameState, petGameState,
+    petGamePollFunction, waterClickerState, waterClickerPollFunction, language]);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -93,6 +92,14 @@ export default function App() {
           setTimeout(() => setNotifications(notifications), 1500);
         }
       }
+      if (wordlePollFunction) {
+        const message = wordlePollFunction(waterClickerState, setWaterClickerState);
+        if (message && message.length > 0) {
+          const id = crypto.randomUUID();
+          setNotifications([...notifications, { message, id }]);
+          setTimeout(() => setNotifications(notifications), 1500);
+        }
+      }
     }, 1000);
     return () => clearInterval(interval);
   }, [matchingGameState, petGameState, waterClickerState, quizGameState, notifications, petGamePollFunction, waterClickerPollFunction]);
@@ -102,7 +109,9 @@ export default function App() {
     localStorage.setItem('quizGameState', JSON.stringify(quizGameState));
     localStorage.setItem('petGameState', JSON.stringify(petGameState));
     localStorage.setItem('waterClickerGameState', JSON.stringify(waterClickerState));
-  }, [matchingGameState, petGameState, waterClickerState, quizGameState]);
+    localStorage.setItem('wordleGameState', JSON.stringify(wordleGameState));
+    localStorage.setItem('language', JSON.stringify(language));
+  }, [matchingGameState, petGameState, waterClickerState, quizGameState, wordleGameState, language]);
 
   return (
     <AppContext.Provider value={sharedState}>
@@ -116,6 +125,7 @@ export default function App() {
             <Route path="2" element={<Game2 />} />
             <Route path="3" element={<Game3 />} />
             <Route path="4" element={<Game4 />} />
+            <Route path="5" element={<Game5 />} />
           </Route>
         </Routes>
       </HashRouter>

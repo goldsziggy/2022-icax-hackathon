@@ -16,3 +16,10 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.has-error {
+  background-color: #DB5AA8!important;
+}
+.has-success {
+  background-color: #65EFCF!important;
+}
