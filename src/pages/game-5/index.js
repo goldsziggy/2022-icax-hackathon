@@ -13,6 +13,8 @@ import { ReactComponent as WaterGlass } from '../../assets/waterglass.svg';
 
 const CustomTextField = styled(TextField)`
   max-width: 45px;
+  padding-left: .25rem;
+  padding-right:.25rem;
   
 `;
 const CustomForm = styled(Form)`
