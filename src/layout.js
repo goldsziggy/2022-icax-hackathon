@@ -55,7 +55,7 @@ const leftArea = (isMenuVisibile, setIsMenuVisibile) => (
       color="white"
       mb="0"
     >
-      Sickle Cell App
+      S.C.K.L.R
     </Header.h5>
   </Flex>
 );
@@ -115,7 +115,7 @@ export default function Layout() {
                 <Link to="/3" onClick={() => { setIsMenuVisibile(false); }}>Flippr</Link>
               </ListItem>
               <ListItem mt="1rem">
-                <Link to="/4" onClick={() => { setIsMenuVisibile(false); }}>Water Clickr</Link>
+                <Link to="/4" onClick={() => { setIsMenuVisibile(false); }}>Clickr</Link>
               </ListItem>
               <ListItem mt="1rem">
                 <Link to="/5" onClick={() => { setIsMenuVisibile(false); }}>Wordlr</Link>
