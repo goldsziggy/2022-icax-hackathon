@@ -76,7 +76,7 @@ export default function App() {
       }
 
       if (petGamePollFunction) {
-        const message = petGamePollFunction(petGameState, dispatchPetGameState);
+        const message = petGamePollFunction(petGameState, dispatchPetGameState, language);
         if (message && message.length > 0) {
           const id = crypto.randomUUID();
           setNotifications([...notifications, { message, id }]);
