@@ -10,6 +10,7 @@ import {
   ListItem,
   Card,
   // Link,
+  SelectField,
   Header,
   Toolbar,
 } from 'grape-ui-react';
@@ -17,6 +18,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 import AppContext from './app-context';
 
+const CustomSelect = styled(SelectField)`
+padding-bottom: .25rem;
+padding-top: .5rem;
+`;
 const ToolbarButton = styled(Button)``;
 const BaseBox = styled(Box)``;
 const CustomList = styled(List)`
@@ -55,12 +60,28 @@ const leftArea = (isMenuVisibile, setIsMenuVisibile) => (
   </Flex>
 );
 
+const langOptions = [
+  { label: 'English', value: 'eng' },
+  { label: 'Espanol', value: 'esp' },
+];
+
+const rightArea = (language, setLanguage) => (
+  <Flex alignItems="center" ml={-3}>
+
+    <CustomSelect
+      onChange={(e) => { console.log(e); setLanguage(e.value); }}
+      options={langOptions}
+      value={langOptions.filter((l) => l.value === language)}
+    />
+  </Flex>
+);
+
 FlexWrapper.defaultProps = {
   flexDirection: 'column',
 };
 
 export default function Layout() {
-  const { notifications } = useContext(AppContext);
+  const { notifications, setLanguage, language } = useContext(AppContext);
   const [isMenuVisibile, setIsMenuVisibile] = useState(false);
 
   return (
@@ -68,6 +89,7 @@ export default function Layout() {
       <Toolbar
         bg="#8755D9"
         leftArea={leftArea(isMenuVisibile, setIsMenuVisibile)}
+        rightArea={rightArea(language, setLanguage)}
       />
       <FlexWrapper
         id="parent-holder"
@@ -94,6 +116,9 @@ export default function Layout() {
               </ListItem>
               <ListItem mt="1rem">
                 <Link to="/4">Water Clicker</Link>
+              </ListItem>
+              <ListItem mt="1rem">
+                <Link to="/5">Wordle</Link>
               </ListItem>
             </CustomList>
           </BoxAside>
