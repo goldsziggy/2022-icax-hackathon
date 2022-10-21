@@ -73,9 +73,9 @@
         "title": "¡UH oh! Algo esta mal."
       },
       "stats": {
-        "attemptCounter": "Contador de intentos totales: ",
+        "attemptCounter": "Número de intentos totales: ",
         "numberCompleted": "Número de palabras completadas: ",
-        "completedWords": "Lista de palabras completa: "
+        "completedWords": "Lista de palabras encontradas: "
       },
       "ui": {
         "button": "Enviar",
@@ -85,12 +85,12 @@
     "waterDrinker": {
       "ui": {
         "title": "¡Bebedor de agua!",
-        "subtitle": "¡Inspirándose en el juego de clicker de galletas!",
+        "subtitle": "¡Inspirado por el juego Cookie Clicker!",
         "click": "¡Haz click en mi!",
-        "out": "¡Fuera de los clics!",
-        "desc": "¡Intenta obtener tu puntaje personal de beber la mayor cantidad de agua! Escuché que hay un secreto aleatorio que a veces sucede....",
-        "timer": "¡Actualmente no tiene clics! Hora de refrescarse en:",
-        "counter": "Su contador de bebidas actual es:",
+        "out": "¡Se agotaron los clics!",
+        "desc": "¡Intenta obtener tu record personal de beber la mayor cantidad de agua! Escuché que hay un secreto aleatorio que a veces sucede....",
+        "timer": "¡Actualmente no tiene clics! Se repondrán en:",
+        "counter": "Tu cuento de sorbos es:",
         "notification": "Water Clicker se ha actualizado!"
       }
     },
