@@ -16,7 +16,11 @@
         "button": "Submit",
         "stats": "Stats"
       }
-    }
+    },
+    "waterDrinker": {},
+    "game1": {},
+    "game2": {},
+    "game3": {}
   },
   "esp": {
     "wordle": {
@@ -36,5 +40,9 @@
         "stats": "Estadísticas"
       }
     }
-  }
+  },
+  "waterDrinker": {},
+  "game1": {},
+  "game2": {},
+  "game3": {}
 }
