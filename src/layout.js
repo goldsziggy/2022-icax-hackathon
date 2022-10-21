@@ -112,7 +112,7 @@ export default function Layout() {
                 <Link to="/2">Game 2</Link>
               </ListItem>
               <ListItem mt="1rem">
-                <Link to="/3">Game 3</Link>
+                <Link to="/3">Card Match</Link>
               </ListItem>
               <ListItem mt="1rem">
                 <Link to="/4">Water Clicker</Link>

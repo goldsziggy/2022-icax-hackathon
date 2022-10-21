@@ -1,7 +1,7 @@
 .cardimg {
     position: relative;
-    height: 200px;
-    width: 200px;
+    height: 8rem;
+    width: 8rem;
     border: ridge;
 }
 
@@ -14,8 +14,8 @@
     border: ridge;
     padding: 10px;
     background: #65EFCF;
-    height: 200px;
-    width: 200px;
+    height: 8rem;
+    width: 8rem;
     align-items: center;
     justify-content: center;
 
@@ -25,6 +25,7 @@
     /* padding: 50px; */
     margin: 10px;
     display: flex;
+    flex-wrap: wrap;
 }
 
 .dis {
