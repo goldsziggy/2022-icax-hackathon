@@ -1,9 +1,15 @@
 import React, { useState } from 'react';
+import { Box, Flex } from 'grape-ui-react';
 import './game-2.css';
+import styled from 'styled-components';
 import { ReactComponent as BloodCell } from './blood-cell.svg';
 import useAudio from '../../hooks/use-audio';
 
 const questions = require('./questions.json');
+
+const CustomBackground = styled(Flex)`
+  background-image: linear-gradient(to left, #F39F86,#F9D976);
+`;
 
 export default function SickleCellQuiz() {
   const [showFinalResults, setFinalResults] = useState(false);
@@ -39,56 +45,58 @@ export default function SickleCellQuiz() {
   };
 
   return (
-    <div className="App">
-      <h1>Sickle Cell Disease Quiz</h1>
-      <h2>
-        Current Score:
-        {' '}
-        {score}
-      </h2>
-      <div className="blood-cell-container">
-        <BloodCell />
-      </div>
+    <CustomBackground alignSelf="center" maxWidth="500px" maxHeight="800px">
+      <Box>
+        <h1>Sickle Cell Disease Quiz</h1>
+        <h2>
+          Current Score:
+          {' '}
+          {score}
+        </h2>
+        <div className="blood-cell-container">
+          <BloodCell />
+        </div>
 
-      { showFinalResults
-        ? (
-          <div className="final-results">
-            <h1> Final Results: </h1>
-            <h2>
-              {score}
-              {' '}
-              out of
-              {' '}
-              {questions.length}
-              {' '}
-              correct!
-            </h2>
-            <button type="button" onClick={() => restartGame()}> Play Again </button>
-          </div>
-        )
-        : (
-          <div className="question-card">
-            <h2>
-              Question
-              {' '}
-              {currentQuestion + 1}
-              {' '}
-              of
-              {' '}
-              {questions.length}
-            </h2>
-            <h3 className="question-text">
-              {questions[currentQuestion].question}
-            </h3>
-            <ul>
-              {questions[currentQuestion].choices.map((choice) => (
-                <li key={choice.id} onClick={() => choiceClicked(choice.isCorrect)}>
-                  {choice.text}
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
-    </div>
+        { showFinalResults
+          ? (
+            <div className="final-results">
+              <h1> Final Results: </h1>
+              <h2>
+                {score}
+                {' '}
+                out of
+                {' '}
+                {questions.length}
+                {' '}
+                correct!
+              </h2>
+              <button type="button" onClick={() => restartGame()}> Play Again </button>
+            </div>
+          )
+          : (
+            <div className="question-card">
+              <h2>
+                Question
+                {' '}
+                {currentQuestion + 1}
+                {' '}
+                of
+                {' '}
+                {questions.length}
+              </h2>
+              <h3 className="question-text">
+                {questions[currentQuestion].question}
+              </h3>
+              <ul>
+                {questions[currentQuestion].choices.map((choice) => (
+                  <li key={choice.id} onClick={() => choiceClicked(choice.isCorrect)}>
+                    {choice.text}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+      </Box>
+    </CustomBackground>
   );
 }

@@ -2,6 +2,7 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 import styled, { css } from 'styled-components';
+import { Box, Flex } from 'grape-ui-react';
 import { ReactComponent as GirlSvg } from './girl1.svg';
 import { ReactComponent as SickGirlSvg } from './sickgirl.svg';
 import GlassOfWater from './glass-of-water.svg';
@@ -95,7 +96,6 @@ const StatsBox = styled.div`
   display: grid;
   grid-template-columns: 150px 1fr;
   height: 25vh;
-  width: 95vw;
   text-align: left;
 `;
 const Message = styled.div`
@@ -143,13 +143,6 @@ const StyledImage = styled.img`
     to {transform: scale(1.05); opacity: 0.8}
   }
   ` : '')}
-`;
-const Grid = styled.div`
-  position: absolute;
-  display: inherit;
-  flex-direction: column;
-  width: 100%;
-  height: 100%;
 `;
 
 function maybeGetInfected(state) {
@@ -262,79 +255,80 @@ export default function Game1() {
   }, [dispatch, setPetGamePollFunction, language]);
 
   return (
-    <Grid>
-      <StatsBox>
-        <StyledStat
-          name={languageData[language].docktr.hydration}
-          value={`${state.hydration}%`}
-          alert={
+    <Flex alignSelf="center" maxWidth="500px" maxHeight="800px">
+      <Box>
+        <StatsBox>
+          <StyledStat
+            name={languageData[language].docktr.hydration}
+            value={`${state.hydration}%`}
+            alert={
             state.hydration !== null && state.hydration < hydrationThreshold
           }
-        />
-        <StyledStat name={languageData[language].docktr.pain} value={`${state.pain.level}/10`} />
-        <StyledStat
-          name={languageData[language].docktr.activeInfection}
-          value={`${state.activeInfection ? languageData[language].docktr.yes : languageData[language].docktr.no}`}
-          alert={state.activeInfection}
-        />
-        <StyledStat
-          name={languageData[language].docktr.daysWithoutPain}
-          value={state.pain.daysWithoutPain}
-        />
-        <StyledStat
-          name={languageData[language].docktr.medStreakLabel}
-          value={`${state.antibiotics.streak} ${(state.antibiotics.streak === 1
-            ? languageData[language].docktr.medStreakOne
-            : languageData[language].docktr.medStreak)}`}
-          alert={state.antibiotics.streak === 0}
-        />
-        <StyledStat
-          name={languageData[language].docktr.currentDate}
-          value={`${new Date(state.currentTime).toLocaleDateString()}
+          />
+          <StyledStat name={languageData[language].docktr.pain} value={`${state.pain.level}/10`} />
+          <StyledStat
+            name={languageData[language].docktr.activeInfection}
+            value={`${state.activeInfection ? languageData[language].docktr.yes : languageData[language].docktr.no}`}
+            alert={state.activeInfection}
+          />
+          <StyledStat
+            name={languageData[language].docktr.daysWithoutPain}
+            value={state.pain.daysWithoutPain}
+          />
+          <StyledStat
+            name={languageData[language].docktr.medStreakLabel}
+            value={`${state.antibiotics.streak} ${(state.antibiotics.streak === 1
+              ? languageData[language].docktr.medStreakOne
+              : languageData[language].docktr.medStreak)}`}
+            alert={state.antibiotics.streak === 0}
+          />
+          <StyledStat
+            name={languageData[language].docktr.currentDate}
+            value={`${new Date(state.currentTime).toLocaleDateString()}
           
           ${new Date(state.currentTime).toLocaleTimeString()}`}
-        />
-      </StatsBox>
-      <Buttons>
-        <StyledImage
-          src={GlassOfWater}
-          enabled={state.hydration < 100}
-          onClick={() => {
-            dispatch({ type: 'GIVE_WATER', value: 10 });
-          }}
-        />
-        <StyledImage
-          src={Syringe}
-          enabled={!state.shots.upToDate}
-          onClick={() => {
-            dispatch({ type: 'GIVE_SHOT' });
-          }}
-        />
-        <StyledImage
-          src={Pills}
-          enabled={!state.antibiotics.upToDate}
-          onClick={() => {
-            dispatch({ type: 'GIVE_ANTIBIOTICS' });
-          }}
-        />
-      </Buttons>
-      <Message>{languageData[language].docktr[state.message.text]}</Message>
+          />
+        </StatsBox>
+        <Buttons>
+          <StyledImage
+            src={GlassOfWater}
+            enabled={state.hydration < 100}
+            onClick={() => {
+              dispatch({ type: 'GIVE_WATER', value: 10 });
+            }}
+          />
+          <StyledImage
+            src={Syringe}
+            enabled={!state.shots.upToDate}
+            onClick={() => {
+              dispatch({ type: 'GIVE_SHOT' });
+            }}
+          />
+          <StyledImage
+            src={Pills}
+            enabled={!state.antibiotics.upToDate}
+            onClick={() => {
+              dispatch({ type: 'GIVE_ANTIBIOTICS' });
+            }}
+          />
+        </Buttons>
+        <Message>{languageData[language].docktr[state.message.text]}</Message>
 
-      <Girl
-        sick={state.activeInfection}
-
-      >{(state.activeInfection ? (
-        <SickGirlSvg
-          height={300}
-          width={150}
-        />
-      ) : (
-        <GirlSvg
-          height={300}
-          width={250}
-        />
-      ))}
-      </Girl>
-    </Grid>
+        <Girl
+          sick={state.activeInfection}
+        >{(state.activeInfection ? (
+          <SickGirlSvg
+            height={300}
+            width={150}
+          />
+        ) : (
+          <GirlSvg
+            height={300}
+            width={250}
+          />
+        ))}
+        </Girl>
+      </Box>
+    </Flex>
   );
 }

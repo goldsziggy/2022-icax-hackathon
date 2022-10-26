@@ -26,6 +26,11 @@
     margin: 10px;
     display: flex;
     flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.cardGroup > div {
+  margin: 8px;
 }
 
 .dis {
