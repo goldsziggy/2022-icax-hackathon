@@ -1,5 +1,6 @@
 import React from 'react';
 import Card from './card';
+import { Box,  Flex} from 'grape-ui-react';
 import './game3.css';
 
 class Game3 extends React.Component {
@@ -72,7 +73,8 @@ cardData: [],
 
   render() {
     return (
-      <div style={{ backgroundColor: '#F9E557', height: '100vh' }}>
+      <Flex alignSelf="center" maxWidth="500px" maxHeight="800px">
+      <Box>
 
         <div className="cardGroup">
           {this.state.cardsSet1.map((card,index) => (
@@ -100,7 +102,8 @@ cardData: [],
             />
           ))}
         </div>
-      </div>
+        </Box>
+      </Flex>
     );
   }
 }
