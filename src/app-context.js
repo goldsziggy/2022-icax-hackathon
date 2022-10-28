@@ -1,8 +1,6 @@
-import { createContext } from 'react';
+import { createContext } from "react";
 
 const defaultState = {
-  notifications: [],
-  addNotification: () => {},
   pollingIntervals: [],
   addPollingInterval: () => {},
   matchingGameState: {},
@@ -14,7 +12,7 @@ const defaultState = {
   petGamePollFunction: () => {},
   setPetGamePollFunction: () => {},
   setLanguage: () => {},
-  language: 'eng',
+  language: "eng",
   waterClickerState: {},
   setWaterClickerState: () => {},
   waterClickerPollFunction: () => {},

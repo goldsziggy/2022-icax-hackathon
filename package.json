@@ -11,11 +11,14 @@
     "@testing-library/user-event": "^13.5.0",
     "grape-ui-react": "^0.13.3",
     "lodash": "^4.17.21",
+    "prop-types": "^15.8.1",
     "react": "^18.2.0",
     "react-card-flip": "^1.1.6",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.4.2",
     "react-scripts": "5.0.1",
+    "react-select": "^5.5.7",
+    "react-toastify": "^9.0.8",
     "styled-components": "^5.3.6",
     "three": "^0.145.0",
     "web-vitals": "^2.1.4"
@@ -26,6 +29,8 @@
     "deploy": "gh-pages -d build",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "lint": "eslint --fix ./src ",
+    "lint:ci": "eslint .",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -49,10 +54,13 @@
   "devDependencies": {
     "eslint": "^8.25.0",
     "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-jsx-a11y": "^6.6.1",
+    "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-react": "^7.31.10",
     "eslint-plugin-react-hooks": "^4.6.0",
-    "gh-pages": "^4.0.0"
+    "gh-pages": "^4.0.0",
+    "prettier": "^2.7.1"
   }
 }
