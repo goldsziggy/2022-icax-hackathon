@@ -6,6 +6,7 @@ import useAudio from "../../hooks/use-audio";
 import AppContext from "../../app-context";
 import { ReactComponent as WaterGlass } from "../../assets/waterglass.svg";
 import localization from "../../assets/localization.json";
+import theme from "../../theme";
 
 const handleClick = ({
   numberOfClicks,
@@ -162,6 +163,7 @@ export default function WaterClicker() {
         <CustomCard
           cardSubtitle={localization[language].waterDrinker.ui.title}
           cardTitle={localization[language].waterDrinker.ui.subtitle}
+          background={theme.colors.white}
           playing={playing}
         >
           <WaterGlassContainer currentFillState={currentFillState}>
