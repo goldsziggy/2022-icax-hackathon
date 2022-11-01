@@ -11,9 +11,6 @@ export default function NotificationContainer() {
       newestOnTop
       closeOnClick
       rtl={false}
-      pauseOnFocusLoss
-      draggable
-      pauseOnHover
       theme="light"
     />
   );

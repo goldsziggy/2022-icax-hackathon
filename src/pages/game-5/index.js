@@ -16,6 +16,7 @@ import styled from "styled-components";
 import useAudio from "../../hooks/use-audio";
 import AppContext from "../../app-context";
 import localization from "../../assets/localization.json";
+import theme from "../../theme";
 
 const CustomTextField = styled(TextField)`
   max-width: 45px;
@@ -31,7 +32,7 @@ const CustomButton = styled(Button)`
   cursor: pointer;
 `;
 const ErrorCard = styled(Card)`
-  border-color: #db5aa8;
+  border-color: ${({ theme: t }) => t.colors.error};
 `;
 
 const YAY_SOUND_URL = `${process.env.PUBLIC_URL}/yay-6326.mp3`;
@@ -162,19 +163,19 @@ export default function Wordle() {
     <Flex alignSelf="center" maxWidth="500px" maxHeight="800px">
       <Box>
         {errorMessage.length > 0 ? (
-          <ErrorCard>
+          <ErrorCard background={theme.colors.white}>
             <Header.h5>{localization[language].wordle.errors.title}</Header.h5>
             <Card.Body>{errorMessage}</Card.Body>
           </ErrorCard>
         ) : null}
 
-        <Card>
+        <Card background={theme.colors.white} border="none">
           <CustomForm flexDirection="row">
             {wordOfDay.split("").map((letter, index) => {
               const valueProp = { value: wordOfDay.split("")[index] };
               return (
                 <CustomTextField
-                  activeColor="#4AAFF1"
+                  activeColor={theme.colors.accent}
                   inputRef={(ref) => {
                     refs[index] = ref;
                   }}
@@ -243,7 +244,7 @@ export default function Wordle() {
             {localization[language].wordle.ui.button}
           </CustomButton>
         </Card>
-        <Card>
+        <Card background={theme.colors.white} border="none">
           <Header.h5>{localization[language].wordle.ui.stats}</Header.h5>
           <Paragraph>
             <Text fontWeight="bold">

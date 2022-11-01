@@ -11,6 +11,7 @@
     "@testing-library/user-event": "^13.5.0",
     "grape-ui-react": "^0.13.3",
     "lodash": "^4.17.21",
+    "polished": "4.2.2",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
     "react-card-flip": "^1.1.6",

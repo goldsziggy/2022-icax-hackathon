@@ -17,17 +17,32 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 import AppContext from "./app-context";
 import NotificationContainer from "./notification-container";
+import theme from "./theme";
+import AnimatedEKG from "./assets/animated-ekg";
 
 const CustomSelect = styled(Select)``;
-const ToolbarButton = styled(Button)``;
+const ToolbarButton = styled(Button)`
+  color: ${({ theme: t }) => t.colors.white};
+  &:hover {
+    color: ${({ theme: t }) => t.colors.black};
+  }
+`;
 const BaseBox = styled(Box)``;
 const CustomList = styled(List)`
-  a {
-    color: #f8f8ff;
-  }
   li {
     padding: 8px;
     border: none;
+
+    a {
+      color: ${({ theme: t }) => t.colors.white};
+    }
+    // &:hover {
+    //   a {
+    //     color: ${({ theme: t }) => t.colors.black};
+    //   }
+
+    //   background-color: ${({ theme: t }) => t.colors.white};
+    // }
   }
 `;
 
@@ -36,11 +51,16 @@ BaseBox.defaultProps = {
   p: 3,
 };
 const BoxAside = styled(BaseBox)`
-  background: ${(props) => props.bg};
+  background: ${({ theme: t }) => t.colors.black}99;
 `;
 
 const FlexWrapper = styled(Flex)`
   text-align: center;
+  background: ${({ theme: t }) => t.colors.white};
+`;
+
+const SVGContainer = styled(Flex)`
+  height: 100%;
 `;
 
 const leftArea = (isMenuVisibile, setIsMenuVisibile) => (
@@ -52,6 +72,12 @@ const leftArea = (isMenuVisibile, setIsMenuVisibile) => (
       S.C.K.L.R
     </Header.h5>
   </Flex>
+);
+
+const centerArea = () => (
+  <SVGContainer alignItems="center" justifyContent="center">
+    <AnimatedEKG />
+  </SVGContainer>
 );
 
 const langOptions = [
@@ -83,9 +109,10 @@ export default function Layout() {
   return (
     <FlexWrapper className="layout" id="layout" alignItems="stretch">
       <Toolbar
-        bg="#8755D9"
+        bg={theme.colors.black}
         leftArea={leftArea(isMenuVisibile, setIsMenuVisibile)}
         rightArea={rightArea(language, setLanguage)}
+        centerArea={centerArea()}
       />
       <FlexWrapper
         id="parent-holder"
