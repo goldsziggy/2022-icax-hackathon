@@ -45,14 +45,13 @@ BaseBox.defaultProps = {
 };
 
 const BoxAside = styled(BaseBox)`
-  background: ${({ theme: t }) =>
-    t.pageStyles.layout.sidebarBackgroundColor +
-    t.pageStyles.layout.sidebarOpacity};
+  background: rgba(255, 255, 255, 0.1);
 `;
 
 const FlexWrapper = styled(Flex)`
   text-align: center;
-  background: ${({ theme: t }) => t.pageStyles.layout.backgroundColor};
+  background: ${({ theme: t, bg }) =>
+    bg || t.pageStyles.layout.backgroundColor};
 `;
 
 const SVGContainer = styled(Flex)`
@@ -116,12 +115,10 @@ export default function Layout() {
         order="1"
         justifyContent="center"
         flexDirection="row"
+        bg={theme.pageStyles.layout.sidebarBackgroundColor}
       >
         {isMenuVisibile ? (
-          <BoxAside
-            bg={theme.pageStyles.layout.sidebarBackgroundColor}
-            maxWidth="25%"
-          >
+          <BoxAside bg="" maxWidth="25%">
             <CustomList unstyled>
               <ListItem mt="1rem">
                 <Link
@@ -182,6 +179,7 @@ export default function Layout() {
           flex="1"
           order="1"
           justifyContent="center"
+          bg={theme.pageStyles.layout.backgroundColor}
         >
           <Outlet />
         </FlexWrapper>
