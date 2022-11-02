@@ -22,9 +22,9 @@ import AnimatedEKG from "./assets/animated-ekg";
 
 const CustomSelect = styled(Select)``;
 const ToolbarButton = styled(Button)`
-  color: ${({ theme: t }) => t.colors.white};
+  color: ${({ theme: t }) => t.pageStyles.layout.toolbarButtonColor};
   &:hover {
-    color: ${({ theme: t }) => t.colors.black};
+    color: ${({ theme: t }) => t.pageStyles.layout.toolbarButtonColorOnHover};
   }
 `;
 const BaseBox = styled(Box)``;
@@ -34,15 +34,8 @@ const CustomList = styled(List)`
     border: none;
 
     a {
-      color: ${({ theme: t }) => t.colors.white};
+      color: ${({ theme: t }) => t.pageStyles.layout.sideBarFontColor};
     }
-    // &:hover {
-    //   a {
-    //     color: ${({ theme: t }) => t.colors.black};
-    //   }
-
-    //   background-color: ${({ theme: t }) => t.colors.white};
-    // }
   }
 `;
 
@@ -50,13 +43,16 @@ BaseBox.defaultProps = {
   flex: "1 100%",
   p: 3,
 };
+
 const BoxAside = styled(BaseBox)`
-  background: ${({ theme: t }) => t.colors.black}99;
+  background: ${({ theme: t }) =>
+    t.pageStyles.layout.sidebarBackgroundColor +
+    t.pageStyles.layout.sidebarOpacity};
 `;
 
 const FlexWrapper = styled(Flex)`
   text-align: center;
-  background: ${({ theme: t }) => t.colors.white};
+  background: ${({ theme: t }) => t.pageStyles.layout.backgroundColor};
 `;
 
 const SVGContainer = styled(Flex)`
@@ -68,7 +64,7 @@ const leftArea = (isMenuVisibile, setIsMenuVisibile) => (
     <ToolbarButton onClick={() => setIsMenuVisibile(!isMenuVisibile)}>
       <FontAwesomeIcon icon={faBars} />
     </ToolbarButton>
-    <Header.h5 color="white" mb="0">
+    <Header.h5 color={theme.pageStyles.layout.toolbarButtonColor} mb="0">
       S.C.K.L.R
     </Header.h5>
   </Flex>
@@ -109,7 +105,7 @@ export default function Layout() {
   return (
     <FlexWrapper className="layout" id="layout" alignItems="stretch">
       <Toolbar
-        bg={theme.colors.black}
+        bg={theme.pageStyles.layout.topbarBackgroundColor}
         leftArea={leftArea(isMenuVisibile, setIsMenuVisibile)}
         rightArea={rightArea(language, setLanguage)}
         centerArea={centerArea()}
@@ -122,7 +118,10 @@ export default function Layout() {
         flexDirection="row"
       >
         {isMenuVisibile ? (
-          <BoxAside bg="#383838" maxWidth="25%">
+          <BoxAside
+            bg={theme.pageStyles.layout.sidebarBackgroundColor}
+            maxWidth="25%"
+          >
             <CustomList unstyled>
               <ListItem mt="1rem">
                 <Link

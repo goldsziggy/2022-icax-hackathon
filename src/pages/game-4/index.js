@@ -4,24 +4,27 @@ import { Header, Box, Card, Flex } from "grape-ui-react";
 import styled, { css } from "styled-components";
 import useAudio from "../../hooks/use-audio";
 import AppContext from "../../app-context";
-import { ReactComponent as WaterGlass } from "../../assets/waterglass.svg";
 import localization from "../../assets/localization.json";
 import theme from "../../theme";
+import WaterGlass from "./water-glass";
 
 const handleClick = ({
   numberOfClicks,
-  setNumberOfClicks,
+  setWaterClickerState,
+  waterClickerState,
   toggleSound,
   playing,
   currentFillState,
-  setCurrentFillState,
-  setTimeLastClicked,
 }) => {
   if (playing) return;
   if (currentFillState < 1) return;
-  setNumberOfClicks(numberOfClicks + 1);
-  setCurrentFillState(currentFillState - 1);
-  setTimeLastClicked(Date.now());
+
+  setWaterClickerState({
+    ...waterClickerState,
+    numberOfClicks: numberOfClicks + 1,
+    currentFillState: currentFillState - 1,
+    timeLastClicked: Date.now(),
+  });
   toggleSound();
 };
 const SOUND_URL = `${process.env.PUBLIC_URL}/heavy_swallowwav-14682.mp3`;
@@ -34,57 +37,6 @@ const CustomCard = styled(Card)`
           transform: scale(0.8);
         `
       : null}
-`;
-const WaterGlassContainer = styled.div`
-  ${(props) => {
-    if (props.currentFillState === 3) {
-      return css`
-        .cls-0,
-        .cls-1,
-        .cls-2,
-        ellipse,
-        #text {
-          transition-delay: 0.5s;
-          transform: matrix(1, 0, 0, 1, 0, 0);
-        }
-      `;
-    }
-    if (props.currentFillState === 2) {
-      return css`
-        .cls-0,
-        .cls-1,
-        .cls-2,
-        ellipse,
-        #text {
-          transition-delay: 0.5s;
-          transform: matrix(0.95, 0, 0, 0.75, 3, 30);
-        }
-      `;
-    }
-    if (props.currentFillState === 1) {
-      return css`
-        .cls-0,
-        .cls-1,
-        .cls-2,
-        ellipse,
-        #text {
-          transition-delay: 0.5s;
-          transform: matrix(0.9, 0, 0, 0.33, 6, 81);
-        }
-      `;
-    }
-
-    return css`
-      .cls-0,
-      .cls-1,
-      .cls-2,
-      ellipse,
-      #text {
-        transition-delay: 0.5s;
-        transform: matrix(0.75, 0, 0, 0.05, 14, 115);
-      }
-    `;
-  }}
 `;
 
 const pollFunction = () => (gameState, setGameState, language) => {
@@ -119,41 +71,12 @@ export default function WaterClicker() {
     language,
   } = useContext(AppContext);
 
-  const [numberOfClicks, setNumberOfClicks] = useState(
-    waterClickerState.numberOfClicks || 0
-  );
-  const [currentFillState, setCurrentFillState] = useState(
-    waterClickerState.currentFillState || 3
-  );
-  const [timeLastClicked, setTimeLastClicked] = useState(
-    waterClickerState.timeLastClicked || Date.now()
-  );
-  const timeTillRefresh = waterClickerState.timeTillRefresh || 0;
-
-  useEffect(() => {
-    setWaterClickerState({
-      numberOfClicks,
-      currentFillState,
-      timeLastClicked,
-      timeTillRefresh,
-    });
-  }, [numberOfClicks, currentFillState, timeLastClicked, timeTillRefresh]);
+  const { currentFillState, timeLastClicked, numberOfClicks, timeTillRefresh } =
+    waterClickerState;
 
   useEffect(() => {
     setWaterClickerPollFunction(pollFunction);
   }, []);
-
-  useEffect(() => {
-    if (waterClickerState.currentFillState !== currentFillState) {
-      setCurrentFillState(waterClickerState.currentFillState);
-    }
-    if (waterClickerState.numberOfClicks !== numberOfClicks) {
-      setNumberOfClicks(waterClickerState.numberOfClicks);
-    }
-    if (waterClickerState.timeLastClicked !== timeLastClicked) {
-      setTimeLastClicked(waterClickerState.timeLastClicked);
-    }
-  }, [waterClickerState]);
 
   const [playing, toggle] = useAudio(SOUND_URL);
 
@@ -166,21 +89,19 @@ export default function WaterClicker() {
           background={theme.colors.white}
           playing={playing}
         >
-          <WaterGlassContainer currentFillState={currentFillState}>
-            <WaterGlass
-              onClick={() =>
-                handleClick({
-                  numberOfClicks,
-                  setNumberOfClicks,
-                  toggleSound: toggle,
-                  playing,
-                  currentFillState,
-                  setCurrentFillState,
-                  setTimeLastClicked,
-                })
-              }
-            />
-          </WaterGlassContainer>
+          <WaterGlass
+            currentFillState={currentFillState}
+            onClick={() =>
+              handleClick({
+                numberOfClicks,
+                setWaterClickerState,
+                waterClickerState,
+                toggleSound: toggle,
+                playing,
+                currentFillState,
+              })
+            }
+          />
 
           <Header.h5>
             {currentFillState === 0
